@@ -1,18 +1,30 @@
 <template>
-  <div>
+  <div class="Poster">
     <van-nav-bar :title="$t('title')" left-arrow @click-left="$router.back()" />
-    <div class="share-box">
-      <div class="bg">
-        <img src="@/assets/images/share-title.png" alt="" class="share-title">
-        <div class="col">
-          <div class="code">{{ userInfo.invitation_code || 'IAFAED' }}</div>
-          <van-button v-clipboard:copy="userInfo.invitation_code" v-clipboard:success="onCopy" color="#595fe7" type="primary" size="small" class="btn">{{ $t('invitation_code') }}</van-button>
+    <div class="conter">
+      <div class="top">
+        <p>好友: 0</p>
+        <p><img src="../../../assets/images/logo.png" alt=""></p>
+      </div>
+      <div class="Invitation">
+        <p class="h3">邀请中心</p>
+        <p class="p1">邀请好友，享更多权益</p>
+      </div>
+      <div v-for="(item,index) in posterList" :key="index" class="posterList" >
+        <div class="h4">
+          <p>{{ item.title }}</p>
+          <p class="bluePrice">仅售{{ item.price }}USDT</p>
         </div>
-        <div class="col">
-          <div id="qrcode" ref="qrCodeUrl" class="qr"></div>
-        </div>
-        <div class="share-ft">
-          <span>扫码下载我们的APP</span>
+        <p class="describe">{{ item.describe }}</p>
+        <p class="blueBuy">立即购买<span><img src="../../../assets/images/BlueNext.png" alt=""></span></p>
+      </div>
+    </div>
+    <div class="copy">
+      <div class="copyDiv">
+        <p>邀请码: <span>{{ code }}</span>  <img src="../../../assets/images/copy.png" alt=""></p>
+        <div class="btn">
+          <div v-clipboard:success="onCopy" v-clipboard:copy="code" class="btnWhite">复制邀请链接</div>
+          <div class="btnBlue" @click="goInvitationPage">生成邀请海报</div>
         </div>
       </div>
     </div>
@@ -20,11 +32,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import QRCode from 'qrcodejs2'
-import { posterShare } from '@/utils/jsbridge'
-let timer = null
 export default {
+  name: 'Poster',
   i18n: {
     messages: {
       zh: {
@@ -37,109 +46,137 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapState({
-      userInfo: ({ user }) => user.userInfo
-    })
-  },
-  mounted () {
-    new QRCode(this.$refs.qrCodeUrl, {
-      text: this.userInfo.invitation_url,
-      width: 140,
-      height: 140
-    })
-
-    timer = setTimeout(() => {
-      posterShare()
-    }, 2000)
-    this.$once('hook:destroyed', () => {
-      clearTimeout(timer)
-      timer = null
-    })
+  data () {
+    return {
+      code: '123',
+      posterList: [
+        {
+          title: '高级用户',
+          price: '1000.00',
+          describe: '活动期间，升级成为高级用户，赠送等值1000智点。邀请用户升级或充值，获20%奖励，自用省钱，分享赚钱。'
+        },
+        {
+          title: 'VIP用户',
+          price: '5000.00',
+          describe: '活动期间，升级成为VIP用户，赠送等值5000智点。邀请用户升级或充值，获40%奖励，自用省钱，分享赚钱。'
+        }
+      ]
+    }
   },
   methods: {
     onCopy () {
       this.$toast('复制成功')
+    },
+    goInvitationPage () {
+      this.$router.push({ path: '/user/invite/invitationPage' })
     }
   }
 }
 </script>
 
-<style lang="less" scoped>
-.share-box {
-  position: relative;
-  background: no-repeat center top;
-  background: linear-gradient(180deg, #141935, #6267ff);
-  height: calc(100vh - 46px);
-  background-size: 100% auto;
-  padding: 5%;
-  .bg {
-    position: relative;
-    height: 100%;
-    background: #fff;
-    background:
-      radial-gradient(circle at 0 45%, transparent 12px, #fff 0),
-      radial-gradient(circle at 100% 45%, transparent 12px, #fff 0);
-    background-size: 51% 100%, 51% 100%;
-    background-repeat: no-repeat;
-    background-position: 0 0,100% 0;
-    box-shadow: 5px 5px 30px -5px rgba(0, 0, 0, .1);
-    overflow: hidden;
-    &::after {
-      content: '';
-      position: absolute;
-      left: 12px;top: 45%;
-      height: 0;
-      width: calc(100% - 24px);
-      border-bottom: 1px dashed #eee;
+<style lang="less">
+.Poster{
+  .conter{
+    margin-top: 10px;
+    padding: 0 14px 20px;
+    background-color: #fff;
+    .top{
+        padding-top: 7px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img{
+            width: 84px;
+            height: 84px;
+        }
+    }
+    .Invitation{
+        margin: 12px 0 26px;
+        height: 95px;
+        padding: 16px 23px;
+        background: url('../../../assets/images/Invitation.png') no-repeat;
+        background-size: 100%;
+        color: #fff;
+        .h3{
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .p1{
+            color:#DDEAFF;
+            font-size: 12px;
+        }
+    }
+    .posterList{
+      height: 152px;
+      padding: 14px;
+      border: 1px #DDDDDD solid;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      .h4{
+          display: flex;
+          justify-content: space-between;
+          color: #000;
+          .bluePrice{
+              color: #2C77E8;
+          }
+      }
+      .describe{
+          font-weight: 400;
+          color: #999;
+          margin: 14px 0 8px;
+      }
+      .blueBuy{
+          color: #2C77E8;
+          text-align: right;
+      }
+      img{
+          width: 16px;
+          height: 16px;
+          vertical-align: middle;
+      }
     }
   }
-  .col {
-    height: 45%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .code {
-    color: #595fe7;
-    font-weight: 500;
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-  .qr {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 20px -5px rgba(0, 0, 0, 0.3);
-  }
-}
-.share-title {
-  position: absolute;
-  top: 5%;
-  left: 10%;
-  width: 80%;
-}
-.share-ft {
-  position: absolute;
-  bottom: 5%;
-  left: 10%;
-  width: 80%;
-  text-align: center;
-  color: #888;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;left: 0;
-    width: 100%;
-    height: 0;
-    border-bottom: 1px solid #eee;
-  }
-  span {
-    position: relative;
-    display: inline-block;
-    background-color: #fff;
-    padding: 0 20px;
-  }
+  .copy{
+        padding-top: 14px;
+        padding-bottom: 20px;
+        border-top: 1px solid #DDDDDD;
+        background-color: #fff;
+        .copyDiv{
+            padding: 0 14px;
+            p{
+                span{
+                    color: #2C77E8;
+                }
+            }
+            img{
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+            }
+            .btn{
+                margin-top: 11px;
+                display: flex;
+                div{
+                  border-radius: 5px;
+                  width: 167px;
+                  height: 44px;
+                  text-align: center;
+                  line-height: 44px;
+                }
+                .btnWhite{
+                  border: 1px solid #2C77E8;
+                  color: #2C77E8;
+                  margin-right: 14px;
+                }
+                .btnBlue{
+                  color: #fff;
+                  background-color: #2C77E8;
+                }
+            }
+        }
+    }
 }
 </style>

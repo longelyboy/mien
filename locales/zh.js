@@ -156,10 +156,10 @@ export default {
   direction: '仓位方向',
   directionbuy: '买入开多',
   directionsell: '卖出开空',
-  sl_trigger_price:'止损触发率',
-  own_order_num:'持仓量（张）',
-  own_positions:'持仓担保资产',
+  sl_trigger_price: '止损触发率',
+  own_order_num: '持仓量（张）',
+  own_positions: '持仓担保资产',
   first_trade_num: '首单买入量（张）',
   unwind: '平仓',
-  zhang: '张',
+  zhang: '张'
 }

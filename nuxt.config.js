@@ -27,7 +27,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'AI',
+    title: 'MIEN',
     meta: [
       { charset: 'utf-8' },
       {

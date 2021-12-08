@@ -55,8 +55,8 @@ export default {
   ROBOT_LOG: 'api/quant/robot/log', // 机器人日志
   ROBOT_ORDER: 'api/quant/robot/order', // 机器人订单
   ROBOT_REVENUE: 'api/quant/robot/revenue', // 机器人收益账单
-  ROBOT_PRICE: "/api/quant/robot/getLimitPrice", //获取合约最高价和最低价
-  ROBOT_STRATEGY: "/api/quant/robot/strategy", //获取后台默认参数
+  ROBOT_PRICE: '/api/quant/robot/getLimitPrice', // 获取合约最高价和最低价
+  ROBOT_STRATEGY: '/api/quant/robot/strategy', // 获取后台默认参数
 
   CDKEY_LIST: 'api/user/cdkey/list', // 激活码列表
   CDKEY_INPUT: 'api/user/cdkey/input', // 手工领取激活码

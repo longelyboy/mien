@@ -57,3 +57,7 @@ Vue.use(Row)
   .use(Radio)
   .use(RadioGroup)
   .use('en-US', enUS)
+Toast.setDefaultOptions({
+  position: 'bottom',
+  duration: 2000
+})

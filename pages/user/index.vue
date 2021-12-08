@@ -180,7 +180,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import ActivationPopup from './activation/ActivationPopup'
 import { format } from '@/utils/time'
 import { BUY_PACKAGE, CHEKC_CDKEY } from '@/config/index'
@@ -220,9 +220,15 @@ export default {
       userInfo: ({ user }) => user.userInfo,
       initInfo: index => index.initInfo,
       thirdLoginEnabled: ({ thirdLoginEnabled }) => thirdLoginEnabled
+    }),
+    ...mapActions({
+      getUserInfo: 'user/getUserInfo'
     })
   },
   methods: {
+    async getUserInfo1() {
+      await this.getUserInfo
+    },
     startCallBack () {
       this.$refs.LuckyWheel.play()
       setTimeout(() => {
@@ -258,6 +264,9 @@ export default {
         }
       })
     }
+  },
+  created() {
+    this.getUserInfo1()
   }
 }
 </script>
