@@ -16,6 +16,7 @@ export default function ({ store, $axios, redirect }) {
     if (config.headers['Content-Type'] !== 'multipart/form-data') { config.data = qs.stringify(params) }
   })
   $axios.onResponse(({ data }) => {
+    // return Promise.resolve(data)
     const { code } = data
     if (code !== 1) {
       return Promise.reject(data)

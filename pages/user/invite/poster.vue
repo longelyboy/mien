@@ -21,9 +21,9 @@
     </div>
     <div class="copy">
       <div class="copyDiv">
-        <p>邀请码: <span>{{ code }}</span>  <img src="../../../assets/images/copy.png" alt=""></p>
+        <p>邀请码: <span>{{ userInfo.invitation_code }}</span>  <img v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_code" src="../../../assets/images/copy.png" alt=""></p>
         <div class="btn">
-          <div v-clipboard:success="onCopy" v-clipboard:copy="code" class="btnWhite">复制邀请链接</div>
+          <div v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_code" class="btnWhite">复制邀请链接</div>
           <div class="btnBlue" @click="goInvitationPage">生成邀请海报</div>
         </div>
       </div>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Poster',
   i18n: {
@@ -62,6 +63,11 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapState({
+      userInfo: ({ user }) => user.userInfo
+    })
   },
   methods: {
     onCopy () {

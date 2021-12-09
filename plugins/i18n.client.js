@@ -31,6 +31,8 @@ export default ({ app, store, route }) => {
   app.i18n = new VueI18n({
     locale: store.state.locale,
     fallbackLocale,
-    messages
+    messages,
+    silentTranslationWarn: true,
+    silentFallbackWarn: true
   })
 }

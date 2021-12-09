@@ -6,22 +6,49 @@
     </div>
     <div class="bottom">
       <div class="logo">
-          <img src="../../../assets/images/InvitationPageLogo.png" alt="">
+        <img src="../../../assets/images/InvitationPageLogo.png" alt="">
       </div>
       <div class="bottom_conter">
         <p>注册即可交易</p>
         <p class="text">长按识别二维码 邀请您加入MIEN</p>
       </div>
-      <div class="qrCode">
-        二维码
+      <div class="qrCodeDom">
+        <div id="code" class="code"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import QRCode from 'qrcodejs2'
 export default {
-  name: 'InvitationPage'
+  name: 'InvitationPage',
+  data () {
+    return {
+      code: '',
+      showCode: false,
+    }
+  },
+  computed: {
+    ...mapState({
+      userInfo: ({ user }) => user.userInfo
+    })
+  },
+  created () {
+    this.getCode()
+  },
+  methods: {
+    getCode () {
+      this.$nextTick(() => {
+        this.code = new QRCode('code', {
+          width: 66,
+          height: 66,
+          text: this.userInfo.invitation_url,
+        })
+      })
+    }
+  },
 }
 </script>
 
@@ -31,7 +58,7 @@ export default {
     width: 100%;
     height: calc(100vh - 88px);
     background: url('../../../assets/images/InvitationPage.png') no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
     padding-top: 58px;
     p{
       color: #fff;
@@ -73,20 +100,17 @@ export default {
       margin-right: 19px;
       .text{
         color: #666;
-        font-size: 13px;
-        white-space: nowrap;
+        font-size: 12px;
       }
     }
-    .qrCode{
+    .qrCodeDom{
       width: 66px;
       height: 66px;
       text-align: center;
       line-height: 66px;
       color: #fff;
-      background-color: #333;
-      img{
-        width: 100%;
-        height: 100%;
+      #qrcode{
+        height: 66px;
       }
     }
   }

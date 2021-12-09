@@ -9,6 +9,13 @@
   ],
   "rules": {
     "space-before-function-paren": 0,
+    "camelcase": 0,
+    "eqeqeq": 0,
+    "no-console": 0,
+    "no-unused-vars": 0,
+    "comma-dangle": 0,
+    "object-curly-spacing": 0,
+    "comma-spacing": 0,
     "vue/no-v-html": 0,
     "vue/max-attributes-per-line": 0,
     "vue/html-closing-bracket-spacing": 0,

@@ -70,5 +70,11 @@ export const actions = {
   },
   async publicSwapTicker ({ commit }, params) {
     return await this.$axios.$post(API.PUBLIC_TICKER_SWAP, params)
+  },
+  async getLimitPrice ({ commit }, params) {
+    return await this.$axios.$post(API.ROBOT_PRICE, params)
+  },
+  async getStrategy ({ commit }, params) {
+    return await this.$axios.$post(API.ROBOT_STRATEGY, params)
   }
 }
