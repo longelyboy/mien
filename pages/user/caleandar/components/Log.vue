@@ -49,9 +49,6 @@ export default {
       robotLog: 'robot/robotLog'
     }),
     loadTransactionLog () {
-      if (this.loading) {
-        this.refreshing = false
-      }
       if (this.refreshing) {
         this.logList = []
         this.offset = 0
@@ -60,6 +57,9 @@ export default {
           this.loading = false
           return
         }
+      }
+       if (this.loading) {
+        this.refreshing = false
       }
       const payload = {
         robot_id: this.robot_id,
@@ -70,17 +70,19 @@ export default {
         .then(({ data }) => {
           if (data.total_count <= this.logList.length) {
             this.loading = false
-            return
           }
           const list = data.data
-          if (list.length >= this.limit) {
+          if (list.length < this.limit) {
             this.finished = true
           } else {
             this.finished = false
             this.offset += this.limit
           }
           this.logList = this.logList.concat(list)
-        }).catch(({msg}) => {
+        }).catch(({data,msg}) => {
+          if (data.length < this.limit) {
+            this.finished = true
+          }
           this.$toast(msg)
         }).finally(() => {
           this.loading = false
