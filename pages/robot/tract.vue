@@ -34,7 +34,7 @@
       >
         <van-col :span="8">
           <div class="label">{{ $t('own_order_num') }}</div>
-          <div class="value">{{ Number(robot.values.deal_money || 0) | numberFormat(6) }}</div>
+          <div class="value">{{ Number(robot.values.deal_amount || 0) | numberFormat(6) }}</div>
         </van-col>
         <van-col :span="8">
           <div class="label">{{ $t('average_price') }}</div>
@@ -50,7 +50,7 @@
         </van-col>
         <van-col :span="8">
           <div class="label">{{ $t('own_positions') }}({{ robot.money }})</div>
-          <div class="value">{{ Number(robot.values.deal_amount || 0) | numberFormat(6) }}</div>
+          <div class="value">{{ Number(robot.values.deal_money || 0) | numberFormat(6) }}</div>
         </van-col>
         <van-col :span="8">
           <div class="label">{{ $t('now_price') }}(USDT)</div>
@@ -61,10 +61,10 @@
           <div class="value">{{ Number(robot.revenue) | numberFormat(6) }}{{ robot.money }}</div>
         </van-col>
 
-        <van-col :span="8">
+        <!-- <van-col :span="8">
           <div class="label">{{ $t('up_down') }}</div>
           <div class="value">{{ Number(robot.rate_hy) | numberFormat(6) }}%</div>
-        </van-col>
+        </van-col> -->
       </van-row>
     </div>
     <div class="title-block">{{ $t('latest_log') }}</div>

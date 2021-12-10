@@ -19,6 +19,7 @@
     </div>
 
     <div class="total-card" type="flex" gutter="20">
+      
       <div class="total-item s2">
         <div class="label">本月盈利(USDT)</div>
         <div class="value">{{ Number(month_revenue).toFixed(6) }}</div>
@@ -75,8 +76,8 @@ export default {
       limit: 20,
       today_revenue: 0,
       total_revenue: 0,
-      week_revenue: 0,
-      month_revenue: 0
+      week_revenue:0,
+      month_revenue:0
 
     }
   },

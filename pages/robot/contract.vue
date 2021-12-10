@@ -11,7 +11,7 @@
         :value="market"
         readonly
         clickable
-        :label="$t('pageRobot.trade_area') /*交易区选择*/"
+        :label="$t('pageRobot.trade_area')"
         :placeholder="$t('pageRobot.trade_area')"
         :rules="[{ required: true }]"
         style="background:#F5F6F7;color:#333;font-weight: 700;"
@@ -19,6 +19,7 @@
       />
       <h3 class="title">预设策略</h3>
       <van-row class="preset">
+        
         <van-col>
           <van-button
             block
@@ -46,23 +47,23 @@
         :placeholder="$t('first_order_num')"
         :rules="[{ required: true}]"
       />
-      <van-field
+       <van-field
         :label="$t('first_order_num1')"
       >
-        <template #input>
-          {{ firstOrderValueU }}
-        </template>
+      <template #input>
+        {{firstOrderValueU}}
+      </template>
       </van-field>
       <van-field
         v-model="price"
-        :label="$t('first_order_price') /*买入价（USDT）*/"
+        :label="$t('first_order_price')"
         :placeholder="$t('first_order_price')"
         :rules="[{ required: true }]"
       />
 
       <van-field label="">
         <template #input>
-          最低买价：{{ robotPrice.low_limit }} &nbsp; 最高买价：{{ robotPrice.high_limit }}
+          最低买价：{{robotPrice.low_limit}} &nbsp; 最高买价：{{robotPrice.high_limit}}
         </template>
       </van-field>
 
@@ -78,6 +79,8 @@
         </template>
       </van-field>
 
+      
+
       <van-field
         v-model="max_order_count"
         :label="$t('number_of_orders')"
@@ -85,6 +88,7 @@
         :rules="[{ required: true }]"
       />
 
+      
       <van-field
         v-model="stop_profit_rate"
         :label="$t('take_profit_ratio') + '(%)'"
@@ -123,6 +127,7 @@
         :placeholder="$t('sl_trigger_price')"
         :rules="[{ required: true }]"
       />
+      
       <van-field name="radio" :label="$t('direction')">
         <template #input>
           <van-radio-group v-model="direction" direction="horizontal">
@@ -208,7 +213,7 @@ export default {
       first_order_value: '100',
       max_order_count: '',
       stop_profit_rate: '',
-      number: 0,
+      number:0,
       stop_profit_callback_rate: '',
       cover_rate: '',
       cover_callback_rate: '',
@@ -216,13 +221,13 @@ export default {
       price: '',
       sl_trigger_price: '',
       cd_key: '',
-      recycle_status: 0,
+      recycle_status:0,
       show: false,
       listInput: [],
-      robotPrice: {},
-      contract_size: 0,
-      defaultStrategy: {},
-      customStrateg: {}
+      robotPrice:{},
+      contract_size:0,
+      defaultStrategy:{},
+      customStrateg:{}
     }
   },
   computed: {
@@ -235,30 +240,32 @@ export default {
       markets: 'robot/markets'
     }),
     marketLists() {
-      // console.log(this.markets(this.platform));
       return this.markets(this.platform) || []
     },
-    firstOrderValueU() {
-      // 张数 * 面值 * 价格 /  20  （marketList）
-      const first_order_value = +this.first_order_value
-      const price = +this.price || 1
-      const contractSize = +this.contract_size
-      return (first_order_value * contractSize * price / 5).toFixed(6)
+    firstOrderValueU(){
+      //张数 * 面值 * 价格 /  20  （marketList）
+      const first_order_value = +this.first_order_value;
+      const price = +this.price || 1;
+      const contractSize = +this.contract_size;
+      return (first_order_value * contractSize * price / 5).toFixed(6);
     }
   },
 
   async created() {
-    if (this.$route.query.data) {
-      this.queryData = JSON.parse(this.$route.query.data)
+    if(this.$route.query.data){
+      this.queryData = JSON.parse(this.$route.query.data);
     }
+    
     this.formType = this.$route.query.type
     if (this.formType === 'edit') {
       const robot = (this.robot = this.robotList.find(
         item => this.$route.query.robot_id === item.id
       ))
-      this.queryData = robot
+      this.queryData = robot;
       // this.listInput [ {count: 1,input: ""} ]
+      console.log(robot)
       this.$nextTick(() => {
+        
         this.platform = robot.platform
         this.checked = robot.c_type
         this.market = robot.market_name
@@ -278,6 +285,7 @@ export default {
         this.listInput = []
       })
     } else {
+      
       const markets = this.queryData
       this.platform = this.$route.query.platform
       this.market = markets.market_name
@@ -286,18 +294,19 @@ export default {
     }
 
     this.marketList({
-      platform: this.platform,
-      type: 'swap'
-    })
-    await this.getStrategy()
+        platform: this.platform,
+        type: 'swap'
+      })
+      await this.getStrategy();
     await this.getLimitPrice()
-    const timer = setInterval(async () => {
-      await this.getLimitPrice()
-    }, 5000)
-    this.$once('hook:beforeDestroy', () => {
+     const timer = setInterval(async () => {
+        await this.getLimitPrice()
+      }, 5000);
+     this.$once('hook:beforeDestroy', () => {
       clearTimeout(timer)
     })
     await this.getContractSize()
+   
   },
   methods: {
     showSetting() {
@@ -365,6 +374,7 @@ export default {
       //   this.listInput[i].count = i + 1
       // }
 
+      console.log(this.listInput)
       this.show = true
 
       // for (let i = 0; i < this.cover_rate; i++) {
@@ -386,10 +396,10 @@ export default {
       // }
     },
     buttoninfo() {
-      this.cover_rate = JSON.stringify(this.listInput.reduce((total, { count, input }) => {
-        total[count] = input
+      this.cover_rate = JSON.stringify(this.listInput.reduce((total,{count,input}) => {
+        total[count] = input;
         return total
-      }, {}))
+      },{}))
       this.show = false
     },
     handleInput(e, item) {
@@ -408,8 +418,7 @@ export default {
     ...mapActions({
       marketList: 'robot/marketList',
       robotCreate: 'robot/robotCreate',
-      robotEdit: 'robot/robotEdit',
-      getLimitPriceLi: 'robot/getLimitPrice'
+      robotEdit: 'robot/robotEdit'
     }),
     onMarket() {
       if (this.formType === 'create') {
@@ -418,6 +427,7 @@ export default {
     },
     onSubmit() {
       let flag = false
+      console.log(this.listInput)
       for (const key in this.listInput) {
         if (this.listInput[key].input !== '' || this.listInput[key].input > 0) {
           flag = true
@@ -427,14 +437,14 @@ export default {
           return
         }
       }
-      const { high_limit, low_limit } = this.robotPrice
-      if (+this.price < low_limit) {
-        this.$toast('买入价不能低于最低买价')
-        return
+      const {high_limit,low_limit}= this.robotPrice
+      if(+this.price < low_limit){
+         this.$toast('买入价不能低于最低买价')
+          return
       }
-      if (+this.price > high_limit) {
-        this.$toast('买入价不能高于最高买价')
-        return
+      if(+this.price > high_limit){
+         this.$toast('买入价不能高于最高买价')
+          return
       }
       if (flag) {
         this.$toast.loading()
@@ -448,7 +458,7 @@ export default {
           stop_profit_callback_rate: this.stop_profit_callback_rate,
           cover_rate: this.listInput,
           c_type: this.checked,
-          type: 2,
+          type:2,
           // 补仓
           // cover_rate: this.cover_rate,
           cover_callback_rate: this.cover_callback_rate,
@@ -494,14 +504,14 @@ export default {
         this.cover_callback_rate = '0.3'
       } else if (index === 3) {
         this.customStrateg = {
-          max_order_count: this.max_order_count,
-          stop_profit_rate: this.stop_profit_rate,
-          number: this.number,
-          stop_profit_callback_rate: this.stop_profit_callback_rate,
-          cover_rate: this.cover_rate,
-          cover_callback_rate: this.cover_callback_rate
+          max_order_count:this.max_order_count,
+          stop_profit_rate:this.stop_profit_rate,
+          number:this.number,
+          stop_profit_callback_rate:this.stop_profit_callback_rate,
+          cover_rate:this.cover_rate,
+          cover_callback_rate:this.cover_callback_rate
         }
-        const { max_order_count, stop_profit_rate, number, stop_profit_callback_rate, cover_rate, cover_callback_rate } = this.defaultStrategy
+        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.defaultStrategy;
         this.max_order_count = max_order_count || '17'
         this.stop_profit_rate = stop_profit_rate || '1.1'
         this.number = number || '10'
@@ -509,9 +519,9 @@ export default {
         this.cover_rate = cover_rate || JSON.stringify(JSON.parse(cover_rate)) || '{"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10","11":"13","12":"16","13":"19","14":"21","15":"26","16":"31","17":"41"}'
         this.cover_callback_rate = cover_callback_rate || '0.3'
       } else if (index === 4) {
-        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.customStrateg
-        for (const item in this.customStrateg) {
-          this[item] = this.customStrateg[item]
+        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.customStrateg;
+        for(var item in this.customStrateg){
+          this[item] = this.customStrateg[item];
         }
         // this.max_order_count = max_order_count
         // this.stop_profit_rate = stop_profit_rate
@@ -521,32 +531,24 @@ export default {
         // this.cover_callback_rate = cover_callback_rate
       }
     },
-    getLimitPrice () {
-      const { market_name } = this.queryData
-      this.getLimitPriceLi({ contract_code: market_name.replace('/', '-') }).then(({ data: { data } }) => {
-        this.robotPrice = data[0]
-      }).catch((err) => {
-        this.$toast(err.msg)
-      })
-      // const { data, code, msg } = await this.$axios.$post(API.ROBOT_PRICE, { contract_code: market_name.replace('/', '-') }) // market_name.replace('/', '-')
-      // if (code !== 1) {
-      //   return this.$toast(msg)
-      // }
-      // this.robotPrice = data.data[0]
+    async getLimitPrice(){
+      const {market_name} = this.queryData
+      const {data:{data:[robotPrice]}}  = await this.$axios.$post(API.ROBOT_PRICE, {contract_code:market_name.replace('/','-')})
+      this.robotPrice = robotPrice;
     },
-    async getContractSize () {
-      const { platform, market_name, type } = this.queryData
-      const { data } = await this.$axios.$post(API.MARKET_LIST, {
+    async getContractSize(){
+      const {platform,market_name,type} = this.queryData;
+      const {data} = await this.$axios.$post(API.MARKET_LIST, {
         platform,
-        type: type === 1 ? 'spot' : 'swap'
+        type:type === 1 ? 'spot' :'swap'
       })
-      const current = data.filter(item => item.market_name === market_name)
-      if (!current) { return }
-      this.contract_size = current[0].contract_size
+     const current = data.filter(item => item.market_name === market_name)
+     if(!current) return;
+     this.contract_size = current[0].contract_size;
     },
-    async getStrategy() {
-      const { data } = await this.$axios.$post(API.ROBOT_STRATEGY, { type: this.queryData.type })
-      this.defaultStrategy = data
+    async getStrategy(){
+      const {data} = await this.$axios.$post(API.ROBOT_STRATEGY, {type:this.queryData.type});
+      this.defaultStrategy = data;
     }
   }
 }

@@ -321,7 +321,7 @@ export default {
   line-height: 20px;
   border-radius: 3px;
   margin-top: 6px;
-  font-size: 0.26rem;
+  font-size: 14px;
   color: rgb(255, 255, 255);
   background: rgb(24, 69, 141);
   padding: 0px 0.15rem;

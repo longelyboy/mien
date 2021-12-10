@@ -19,6 +19,7 @@
       />
       <h3 class="title">预设策略</h3>
       <van-row class="preset">
+        
         <van-col>
           <van-button
             block
@@ -40,7 +41,7 @@
           </van-button>
         </van-col>
       </van-row>
-      <van-field
+       <van-field
         v-model="first_order_value"
         :label="$t('first_order_amount') + '(' + money + ')'"
         :placeholder="$t('first_order_amount')"
@@ -103,6 +104,7 @@
         :placeholder="$t('cover_pullback')"
         :rules="[{ required: true }]"
       />
+      
       <van-field
         v-if="formType === 'create' && CHEKC_CDKEY"
         v-model="cd_key"
@@ -180,19 +182,19 @@ export default {
       first_order_value: '100',
       max_order_count: '',
       stop_profit_rate: '',
-      number: 0,
+      number:0,
       stop_profit_callback_rate: '',
       cover_rate: '',
       cover_callback_rate: '',
       price: '',
       cd_key: '',
-      recycle_status: 0,
+      recycle_status:0,
       show: false,
       listInput: [],
-      robotPrice: {},
-      contract_size: 0,
-      defaultStrategy: {},
-      customStrateg: {}
+      robotPrice:{},
+      contract_size:0,
+      defaultStrategy:{},
+      customStrateg:{}
     }
   },
   computed: {
@@ -207,27 +209,30 @@ export default {
     marketLists() {
       return this.markets(this.platform) || []
     },
-    firstOrderValueU() {
-      // 张数 * 面值 * 价格 / 20 （marketList）
-      const first_order_value = +this.first_order_value
-      const price = +this.price || 1
-      const contractSize = +this.contract_size
-      return (first_order_value * contractSize * price / 20).toFixed(6)
+    firstOrderValueU(){
+      //张数 * 面值 * 价格 /  20  （marketList）
+      const first_order_value = +this.first_order_value;
+      const price = +this.price || 1;
+      const contractSize = +this.contract_size;
+      return (first_order_value * contractSize * price / 20).toFixed(6);
     }
   },
 
   async created() {
-    if (this.$route.query.data) {
-      this.queryData = JSON.parse(this.$route.query.data)
+    if(this.$route.query.data){
+      this.queryData = JSON.parse(this.$route.query.data);
     }
+    
     this.formType = this.$route.query.type
     if (this.formType === 'edit') {
       const robot = (this.robot = this.robotList.find(
         item => this.$route.query.robot_id === item.id
       ))
-      this.queryData = robot
+      this.queryData = robot;
       // this.listInput [ {count: 1,input: ""} ]
+      console.log(robot)
       this.$nextTick(() => {
+        
         this.platform = robot.platform
         this.checked = robot.c_type
         this.market = robot.market_name
@@ -245,6 +250,7 @@ export default {
         this.listInput = []
       })
     } else {
+      
       const markets = this.queryData
       this.platform = this.$route.query.platform
       this.market = markets.market_name
@@ -253,10 +259,13 @@ export default {
     }
 
     this.marketList({
-      platform: this.platform,
-      type: 'swap'
-    })
-    await this.getStrategy()
+        platform: this.platform,
+        type: 'swap'
+      })
+      await this.getStrategy();
+   
+     
+   
   },
   methods: {
     showSetting() {
@@ -346,10 +355,10 @@ export default {
       // }
     },
     buttoninfo() {
-      this.cover_rate = JSON.stringify(this.listInput.reduce((total, { count, input }) => {
-        total[count] = input
+      this.cover_rate = JSON.stringify(this.listInput.reduce((total,{count,input}) => {
+        total[count] = input;
         return total
-      }, {}))
+      },{}))
       this.show = false
     },
     handleInput(e, item) {
@@ -368,8 +377,7 @@ export default {
     ...mapActions({
       marketList: 'robot/marketList',
       robotCreate: 'robot/robotCreate',
-      robotEdit: 'robot/robotEdit',
-      getStrategyLi: 'robot/getStrategy'
+      robotEdit: 'robot/robotEdit'
     }),
     onMarket() {
       if (this.formType === 'create') {
@@ -400,13 +408,13 @@ export default {
           stop_profit_callback_rate: this.stop_profit_callback_rate,
           cover_rate: this.listInput,
           c_type: this.checked,
-          type: 1,
+          type:1,
           // 补仓
           // cover_rate: this.cover_rate,
           cover_callback_rate: this.cover_callback_rate,
           price: this.price,
           cd_key: this.cd_key,
-          recycle_status: this.recycle_status
+          recycle_status: this.recycle_status,
         }
         if (this.formType === 'edit') {
           payload.robot_id = this.robot_id
@@ -444,14 +452,14 @@ export default {
         this.cover_callback_rate = '0.3'
       } else if (index === 3) {
         this.customStrateg = {
-          max_order_count: this.max_order_count,
-          stop_profit_rate: this.stop_profit_rate,
-          number: this.number,
-          stop_profit_callback_rate: this.stop_profit_callback_rate,
-          cover_rate: this.cover_rate,
-          cover_callback_rate: this.cover_callback_rate
+          max_order_count:this.max_order_count,
+          stop_profit_rate:this.stop_profit_rate,
+          number:this.number,
+          stop_profit_callback_rate:this.stop_profit_callback_rate,
+          cover_rate:this.cover_rate,
+          cover_callback_rate:this.cover_callback_rate
         }
-        const { max_order_count, stop_profit_rate, number, stop_profit_callback_rate, cover_rate, cover_callback_rate } = this.defaultStrategy
+        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.defaultStrategy;
         this.max_order_count = max_order_count || '17'
         this.stop_profit_rate = stop_profit_rate || '1.1'
         this.number = number || '10'
@@ -459,9 +467,9 @@ export default {
         this.cover_rate = cover_rate || JSON.stringify(JSON.parse(cover_rate)) || '{"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10","11":"13","12":"16","13":"19","14":"21","15":"26","16":"31","17":"41"}'
         this.cover_callback_rate = cover_callback_rate || '0.3'
       } else if (index === 4) {
-        const { max_order_count, stop_profit_rate, number, stop_profit_callback_rate, cover_rate, cover_callback_rate } = this.customStrateg
-        for (const item in this.customStrateg) {
-          this[item] = this.customStrateg[item]
+        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.customStrateg;
+        for(var item in this.customStrateg){
+          this[item] = this.customStrateg[item];
         }
         // this.max_order_count = max_order_count
         // this.stop_profit_rate = stop_profit_rate
@@ -471,15 +479,11 @@ export default {
         // this.cover_callback_rate = cover_callback_rate
       }
     },
-    getStrategy() {
-      this.getStrategyLi({ type: this.queryData.type }).then(({ data }) => {
-        console.log(data)
-        this.defaultStrategy = data
-      }).catch((err) => {
-        this.$toast(err.msg)
-      })
-      // const { data } = await this.$axios.$post(API.ROBOT_STRATEGY, { type: this.queryData.type })
-      // this.defaultStrategy = data
+    
+   
+    async getStrategy(){
+      const {data} = await this.$axios.$post(API.ROBOT_STRATEGY, {type:this.queryData.type});
+      this.defaultStrategy = data;
     }
   }
 }
