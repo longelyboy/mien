@@ -22,7 +22,7 @@
         >
           <div class="robot-item">
             <div class="hd">
-              <div class="name">{{ item.stock }} / {{ item.money }}</div>
+              <div class="name">{{ item.market }}</div>
               <div
                 v-if="item.side == 1"
                 class="status"
@@ -37,9 +37,10 @@
             <div class="info">
               <div v-if="item.type == 1">
                 {{ $t('turnover') }}<span>{{ Number(item.deal_money) | numberFormat(8) }} {{ item.money }}</span>
+                
               </div>
               <div v-if="item.type == 2">
-                {{ $t('turnover') }}<span>{{ Number(item.deal_money) | numberFormat(8) }} {{ $t('zhang') }}</span>
+                {{ $t('turnover') }}<span>{{ Number(item.deal_amount) | numberFormat(8) }} {{ $t('zhang') }}</span>
               </div>
 
               <div v-if="item.type == 1">
@@ -47,8 +48,9 @@
               </div>
 
               <div v-if="item.type == 2">
-                {{ $t('own_positions') }}<span>{{ Number(item.deal_amount) | numberFormat(8) }} {{ item.money }}</span>
+                {{ $t('own_positions') }}<span>{{ Number(item.deal_money) | numberFormat(8) }} {{ item.money }}</span>
               </div>
+              
               <div>
                 {{ $t('price') }}<span>{{ Number(item.price) | numberFormat(8) }} {{ item.money }}</span>
               </div>

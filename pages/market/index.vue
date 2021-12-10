@@ -84,52 +84,53 @@ export default {
   },
   watch: {
     active (newVal) {
-      if (this.typeShow == 1) {
+
+      if(this.typeShow == 1){
         this.account = ''
-        this.getApiAccountBalanceSwap({ platform: this.platform[newVal].label })
-        // this.apiAccountBalanceSwap({ platform: this.platform[newVal].label }).then((res) => {
-        //   this.account = res.data.free
-        // })
-      } else {
+        this.apiAccountBalanceSwap({ platform: this.platform[newVal].label }).then((res) => {
+          this.account = res.data.free
+        })
+      }else{
         this.account = ''
-        this.getApiAccountBalanceSwap({ platform: this.platform[newVal].label })
-        // this.apiAccountBalance({ platform: this.platform[newVal].label }).then((res) => {
-        //   this.account = res.data.free
-        // })
+        this.apiAccountBalance({ platform: this.platform[newVal].label }).then((res) => {
+          this.account = res.data.free
+        })
       }
+     
     },
     typeShow (newVal) {
-      if (newVal == 1) {
+
+      if(newVal == 1){
         this.account = ''
-        this.getApiAccountBalanceSwap({ platform: this.platform[this.active].label })
-        // this.apiAccountBalanceSwap({ platform: this.platform[this.active].label }).then((res) => {
-        //   this.account = res.data.free
-        // })
-      } else {
+        this.apiAccountBalanceSwap({ platform: this.platform[this.active].label }).then((res) => {
+          this.account = res.data.free
+        })
+      }else{
         this.account = ''
-        this.getApiAccountBalanceSwap({ platform: this.platform[this.active].label })
-        // this.apiAccountBalance({ platform: this.platform[this.active].label }).then((res) => {
-        //   this.account = res.data.free
-        // })
+        this.apiAccountBalance({ platform: this.platform[this.active].label }).then((res) => {
+          this.account = res.data.free
+        })
       }
+     
     }
   },
   mounted() {
-    if (this.typeShow == 1) {
-      this.getApiAccountBalanceSwap({ platform: this.platform[0].label })
-      // this.apiAccountBalanceSwap({ platform: this.platform[0].label }).then((res) => {
-      //   this.account = res.data.free
-      // })
-    } else {
-      this.getApiAccountBalanceSwap({ platform: this.platform[0].label })
-      // this.apiAccountBalance({ platform: this.platform[0].label }).then((res) => {
-      //   this.account = res.data.free
-      // })
+    if(this.typeShow == 1){
+        this.apiAccountBalanceSwap({ platform: this.platform[0].label }).then((res) => {
+          this.account = res.data.free
+        })
+    }else{
+      this.apiAccountBalance({ platform: this.platform[0].label }).then((res) => {
+        this.account = res.data.free
+      })
     }
+    
   },
   methods: {
     liFn(type) {
+      
       this.typeShow = type
+      
       if (type === 1) {
         this.$refs.tabs1.style.fontWeight = '700'
         this.$refs.tabs2.style.fontWeight = '400'
@@ -138,20 +139,13 @@ export default {
         this.$refs.tabs2.style.fontWeight = '700'
       }
       this.$nextTick(() => {
-        this.$refs[type == 2 ? 'assetsList' : 'assetsList1'][0].loadData()
+       this.$refs[type == 2 ? 'assetsList' : 'assetsList1'][0].loadData();
       })
     },
     ...mapActions({
       apiAccountBalance: 'authorize/apiAccountBalance',
       apiAccountBalanceSwap: 'authorize/apiSwapAccountBalance'
-    }),
-    getApiAccountBalanceSwap (params) {
-      this.apiAccountBalanceSwap(params).then((res) => {
-        this.account = res.data.free
-      }).catch((err) => {
-        this.$toast(err.msg)
-      })
-    }
+    })
   }
 }
 </script>
