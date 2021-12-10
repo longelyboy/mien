@@ -21,12 +21,15 @@ export default function ({ store, $axios, redirect }) {
     if (code !== 1) {
       return Promise.reject(data)
     }
+    if (code === 10001) {
+      redirect('/sign/login')
+    }
   })
 
   $axios.onError((error) => {
     const { code } = error
     if (code === 10001) {
-      // redirect('/sign/login')
+      redirect('/sign/login')
     }
   })
 }

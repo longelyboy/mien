@@ -1,9 +1,9 @@
 <template>
   <div class="Poster">
-    <van-nav-bar :title="$t('title')" left-arrow @click-left="$router.back()" />
+    <van-nav-bar :title="$t('title')" fixed left-arrow @click-left="$router.back()" />
     <div class="conter">
       <div class="top">
-        <p>好友: 0</p>
+        <p>好友: {{ invite_count }}</p>
         <p><img src="../../../assets/images/logo.png" alt=""></p>
       </div>
       <div class="Invitation">
@@ -12,18 +12,18 @@
       </div>
       <div v-for="(item,index) in posterList" :key="index" class="posterList" >
         <div class="h4">
-          <p>{{ item.title }}</p>
-          <p class="bluePrice">仅售{{ item.price }}USDT</p>
+          <p>{{ item.level_name }}</p>
+          <p class="bluePrice">仅售{{ item.need_recharge_num }}USDT</p>
         </div>
-        <p class="describe">{{ item.describe }}</p>
-        <p class="blueBuy">立即购买<span><img src="../../../assets/images/BlueNext.png" alt=""></span></p>
+        <p class="describe">{{ item.remark }}</p>
+        <p class="blueBuy" @click="goReceive">立即购买<span><img src="../../../assets/images/BlueNext.png" alt=""></span></p>
       </div>
     </div>
     <div class="copy">
       <div class="copyDiv">
         <p>邀请码: <span>{{ userInfo.invitation_code }}</span>  <img v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_code" src="../../../assets/images/copy.png" alt=""></p>
         <div class="btn">
-          <div v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_code" class="btnWhite">复制邀请链接</div>
+          <div v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_url" class="btnWhite">复制邀请链接</div>
           <div class="btnBlue" @click="goInvitationPage">生成邀请海报</div>
         </div>
       </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Poster',
   i18n: {
@@ -50,16 +50,17 @@ export default {
   data () {
     return {
       code: '123',
+      invite_count: '',
       posterList: [
         {
-          title: '高级用户',
-          price: '1000.00',
-          describe: '活动期间，升级成为高级用户，赠送等值1000智点。邀请用户升级或充值，获20%奖励，自用省钱，分享赚钱。'
+          level_name: '高级用户',
+          need_recharge_num: '1000.00',
+          remark: '活动期间，升级成为高级用户，赠送等值1000智点。邀请用户升级或充值，获20%奖励，自用省钱，分享赚钱。'
         },
         {
-          title: 'VIP用户',
-          price: '5000.00',
-          describe: '活动期间，升级成为VIP用户，赠送等值5000智点。邀请用户升级或充值，获40%奖励，自用省钱，分享赚钱。'
+          level_name: 'VIP用户',
+          need_recharge_num: '5000.00',
+          remark: '活动期间，升级成为VIP用户，赠送等值5000智点。邀请用户升级或充值，获40%奖励，自用省钱，分享赚钱。'
         }
       ]
     }
@@ -69,7 +70,21 @@ export default {
       userInfo: ({ user }) => user.userInfo
     })
   },
+  created () {
+    this.getinvitationLevelList().then(({ data: { list, data }}) => {
+      this.invite_count = data
+      this.posterList = list
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
   methods: {
+    ...mapActions({
+      getinvitationLevelList: 'user/getinvitationLevelList'
+    }),
+    goReceive () {
+      this.$router.push({ path: '/wallet/receive', query: { symbol: 'USDT-TRC' }})
+    },
     onCopy () {
       this.$toast('复制成功')
     },
@@ -82,8 +97,12 @@ export default {
 
 <style lang="less">
 .Poster{
+  .van-nav-bar{
+    margin: 0;
+    padding-top: 20px;
+  }
   .conter{
-    margin-top: 10px;
+    margin-top: 76px;
     padding: 0 14px 20px;
     background-color: #fff;
     .top{

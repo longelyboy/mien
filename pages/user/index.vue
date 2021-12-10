@@ -325,7 +325,6 @@ export default {
   color: rgb(255, 255, 255);
   background: rgb(24, 69, 141);
   padding: 0px 0.15rem;
-  
 }
 .user-tip {
   font-size: 12px;

@@ -12,7 +12,6 @@
     </van-swipe>
     <notice></notice>
     <rank></rank>
-    
     <menu-pic></menu-pic>
     <markets></markets>
     <div v-show="show" class="van-overlay" @click="show=false">

@@ -2,7 +2,9 @@
   <div>
     <van-nav-bar :border="false" :title="$t('pageUser.history')" left-arrow @click-left="$router.back()" />
     <van-tabs v-model="active">
-      <van-tab :title="$t('log')"><log></log></van-tab>
+      <van-tab :title="$t('log')">
+        <log></log>
+      </van-tab>
       <van-tab :title="$t('order')"><order></order></van-tab>
     </van-tabs>
   </div>

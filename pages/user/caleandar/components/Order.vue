@@ -101,8 +101,9 @@ export default {
             this.offset += this.limit
           }
           this.orderList = this.orderList.concat(list)
-        })
-        .finally(() => {
+        }).catch(({msg}) => {
+          this.$toast(msg)
+        }).finally(() => {
           this.loading = false
           this.refreshing = false
         })
