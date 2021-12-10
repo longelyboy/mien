@@ -121,5 +121,9 @@ export const actions = {
   },
   async changeLevel ({ commit }, params) {
     return await this.$axios.$post(API.INVITATION_LEVEL, params)
+  },
+  async getinvitationLevelList ({ commit }, params) {
+    console.log(1)
+    return await this.$axios.$get(API.INVITATION_LEVELLIST, params)
   }
 }

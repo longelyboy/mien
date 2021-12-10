@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { Ruler } from '@icon-park/vue'
 import { mapActions } from 'vuex'
 export default {
   data () {
@@ -57,7 +58,7 @@ export default {
           return
         }
       }
-      if (this.loading) {
+       if (this.loading) {
         this.refreshing = false
       }
       const payload = {
@@ -67,6 +68,9 @@ export default {
       }
       this.robotLog(payload)
         .then(({ data }) => {
+          if (data.total_count <= this.logList.length) {
+            this.loading = false
+          }
           const list = data.data
           if (list.length < this.limit) {
             this.finished = true
@@ -75,8 +79,12 @@ export default {
             this.offset += this.limit
           }
           this.logList = this.logList.concat(list)
-        })
-        .finally(() => {
+        }).catch(({data,msg}) => {
+          if (data.length < this.limit) {
+            this.finished = true
+          }
+          this.$toast(msg)
+        }).finally(() => {
           this.loading = false
           this.refreshing = false
         })

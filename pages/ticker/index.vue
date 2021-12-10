@@ -2,24 +2,29 @@
   <div style="overflow-x: hidden">
     <div safe-area-inset-top>
       <van-row type="flex" justify="space-between" align="center" class="page-header">
-        <van-col class="page-header-left" style="width:100%;margin:auto;">
-          <h2 class="page-title" >{{ $t('nav.ticker') }}</h2>
-        </van-col>
-         <van-col class="page-header-right">
-          <van-icon
-            class="sort-btn"
-            name="descending"
-            color="@themeColor"
-            size="18"
-            @click="handleLink('/ticker/rearrange')"
-          />
-          <van-icon
-            name="plus"
-            color="@themeColor"
-            size="18"
-            @click="handleLink('/ticker/subscribe')"
-          />
-        </van-col>
+        <div>
+          <van-col class="page-header-right">
+            <van-icon
+              class="sort-btn"
+              name="descending"
+              color="@themeColor"
+              size="18"
+              @click="handleLink('/ticker/rearrange')"
+            />
+            <van-icon
+              name="plus"
+              color="@themeColor"
+              size="18"
+              @click="handleLink('/ticker/subscribe')"
+            />
+          </van-col>
+        </div>
+        <div>
+          <van-col class="page-header-left" style="width:100%;margin:auto;">
+            <h2 class="page-title" >{{ $t('nav.ticker') }}</h2>
+          </van-col>
+        </div>
+        <div></div>
       </van-row>
     </div>
     <van-row class="head" type="flex" justify="space-between" align="center">
@@ -50,8 +55,8 @@
                     src="../../assets/images/icon-caret-up.png"
                     width="8"
                     height="8"
-                  /> 
-                   <img v-else src="../../assets/images/icon-caret-down.png" width="8" height="8" />
+                  />
+                  <img v-else src="../../assets/images/icon-caret-down.png" width="8" height="8" />
                 </p>
               </van-col>
             </van-row>
@@ -100,7 +105,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getTickerList: 'ticker/getTickerList'
+      getTickerList: 'ticker/getTickerList',
     }),
     loadData () {
       this.getTickerList({
@@ -126,9 +131,14 @@ export default {
 
 <style scoped lang="less">
 .page-header {
+  display: flex;
+  justify-content: space-between;
   background-color: #fff;
   height: 46px;
   padding: 0 15px;
+  div{
+    flex: 1;
+  }
   &-right .van-icon {
     display: inline-block;
     vertical-align: middle;

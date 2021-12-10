@@ -28,6 +28,7 @@ export default {
   CHANGE_PAY_PWD: 'api/user/pay_pwd/uppwd', // 更新支付密码
   FORGET_PAY_PWD: 'api/user/pay_pwd/forgetpwd', // 找回支付密码
   INVITATION_LEVEL: 'api/user/invitation/changeUserLevel',
+  INVITATION_LEVELLIST: 'api/user/invitation/levelList', // 好友数量
 
   USER_AUTH: 'api/user/user_auth/getAuthGrade', // 获取认证等级描述
   ADD_AUTH: 'api/user/user_auth/addauth', // 申请实名认证

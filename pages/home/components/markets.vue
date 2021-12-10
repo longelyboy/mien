@@ -123,6 +123,10 @@ export default {
       robotList: 'robot/robotList'
     }),
     loadData () {
+      const token = localStorage.getItem('USER_TOKEN')
+      if (!token) {
+        return
+      }
       this.robotList().then(() => {
         this.isLoading = false
       })

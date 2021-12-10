@@ -1,15 +1,30 @@
 <template>
-  <div>
-    <van-nav-bar :title="$t('title')" left-arrow @click-left="$router.back()" />
-    <div class="share-box">
-      <div class="bg">
-        <img src="@/assets/images/share-title.png" alt="" class="share-title">
-        <div class="col">
-          <div class="code">{{ userInfo.invitation_code || 'IAFAED' }}</div>
-          <van-button v-clipboard:copy="userInfo.invitation_code" v-clipboard:success="onCopy" color="#595fe7" type="primary" size="small" class="btn">{{ $t('invitation_code') }}</van-button>
+  <div class="Poster">
+    <van-nav-bar :title="$t('title')" fixed left-arrow @click-left="$router.back()" />
+    <div class="conter">
+      <div class="top">
+        <p>好友: {{ invite_count }}</p>
+        <p><img src="../../../assets/images/logo.png" alt=""></p>
+      </div>
+      <div class="Invitation">
+        <p class="h3">邀请中心</p>
+        <p class="p1">邀请好友，享更多权益</p>
+      </div>
+      <div v-for="(item,index) in posterList" :key="index" class="posterList" >
+        <div class="h4">
+          <p>{{ item.level_name }}</p>
+          <p class="bluePrice">仅售{{ item.need_recharge_num }}USDT</p>
         </div>
-        <div class="col">
-          <div id="qrcode" ref="qrCodeUrl" class="qr"></div>
+        <p class="describe">{{ item.remark }}</p>
+        <p class="blueBuy" @click="goReceive">立即购买<span><img src="../../../assets/images/BlueNext.png" alt=""></span></p>
+      </div>
+    </div>
+    <div class="copy">
+      <div class="copyDiv">
+        <p>邀请码: <span>{{ userInfo.invitation_code }}</span>  <img v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_code" src="../../../assets/images/copy.png" alt=""></p>
+        <div class="btn">
+          <div v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_url" class="btnWhite">复制邀请链接</div>
+          <div class="btnBlue" @click="goInvitationPage">生成邀请海报</div>
         </div>
         <div class="share-ft">
           <span>扫码下载我们的APP</span>
@@ -20,10 +35,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import QRCode from 'qrcodejs2'
-import { posterShare } from '@/utils/jsbridge'
-let timer = null
+import { mapState, mapActions } from 'vuex'
 export default {
   i18n: {
     messages: {
@@ -37,27 +49,44 @@ export default {
       }
     }
   },
+  data () {
+    return {
+      code: '123',
+      invite_count: '',
+      posterList: [
+        {
+          level_name: '高级用户',
+          need_recharge_num: '1000.00',
+          remark: '活动期间，升级成为高级用户，赠送等值1000智点。邀请用户升级或充值，获20%奖励，自用省钱，分享赚钱。'
+        },
+        {
+          level_name: 'VIP用户',
+          need_recharge_num: '5000.00',
+          remark: '活动期间，升级成为VIP用户，赠送等值5000智点。邀请用户升级或充值，获40%奖励，自用省钱，分享赚钱。'
+        }
+      ]
+    }
+  },
   computed: {
     ...mapState({
       userInfo: ({ user }) => user.userInfo
     })
   },
-  mounted () {
-    new QRCode(this.$refs.qrCodeUrl, {
-      text: this.userInfo.invitation_url,
-      width: 140,
-      height: 140
-    })
-
-    timer = setTimeout(() => {
-      posterShare()
-    }, 2000)
-    this.$once('hook:destroyed', () => {
-      clearTimeout(timer)
-      timer = null
+  created () {
+    this.getinvitationLevelList().then(({ data: { list, data }}) => {
+      this.invite_count = data
+      this.posterList = list
+    }).catch((err) => {
+      console.log(err)
     })
   },
   methods: {
+    ...mapActions({
+      getinvitationLevelList: 'user/getinvitationLevelList'
+    }),
+    goReceive () {
+      this.$router.push({ path: '/wallet/receive', query: { symbol: 'USDT-TRC' }})
+    },
     onCopy () {
       this.$toast('复制成功')
     }
@@ -65,33 +94,25 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-.share-box {
-  position: relative;
-  background: no-repeat center top;
-  background: linear-gradient(180deg, #141935, #6267ff);
-  height: calc(100vh - 46px);
-  background-size: 100% auto;
-  padding: 5%;
-  .bg {
-    position: relative;
-    height: 100%;
-    background: #fff;
-    background:
-      radial-gradient(circle at 0 45%, transparent 12px, #fff 0),
-      radial-gradient(circle at 100% 45%, transparent 12px, #fff 0);
-    background-size: 51% 100%, 51% 100%;
-    background-repeat: no-repeat;
-    background-position: 0 0,100% 0;
-    box-shadow: 5px 5px 30px -5px rgba(0, 0, 0, .1);
-    overflow: hidden;
-    &::after {
-      content: '';
-      position: absolute;
-      left: 12px;top: 45%;
-      height: 0;
-      width: calc(100% - 24px);
-      border-bottom: 1px dashed #eee;
+<style lang="less">
+.Poster{
+  .van-nav-bar{
+    margin: 0;
+    padding-top: 20px;
+  }
+  .conter{
+    margin-top: 76px;
+    padding: 0 14px 20px;
+    background-color: #fff;
+    .top{
+        padding-top: 7px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img{
+            width: 84px;
+            height: 84px;
+        }
     }
   }
   .col {

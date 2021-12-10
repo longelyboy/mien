@@ -1,6 +1,7 @@
 <template>
   <div class="invitationPage">
     <div class="conter">
+      <van-icon class="goBack" size="18" color="#fff" name="arrow-left" @click="goBack" />
       <p class="imger"><img src="../../../assets/images/logo.png" alt=""></p>
       <p>邀你一起参与MIEN交易所</p>
     </div>
@@ -28,7 +29,6 @@ export default {
     return {
       code: '',
       showCode: false,
-      height: window.innerHeight
     }
   },
   computed: {
@@ -37,10 +37,12 @@ export default {
     })
   },
   created () {
-    console.log(this.height)
     this.getCode()
   },
   methods: {
+    goBack () {
+      this.$router.back()
+    },
     getCode () {
       this.$nextTick(() => {
         this.code = new QRCode('code', {
@@ -62,6 +64,11 @@ export default {
     background: url('../../../assets/images/InvitationPage.png') no-repeat;
     background-size: 100% 100%;
     padding-top: 58px;
+    .goBack{
+      position: absolute;
+      top: 35px;
+      left: 16px;
+    }
     p{
       color: #fff;
       font-size: 24px;

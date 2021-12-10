@@ -112,8 +112,12 @@ export default {
             this.offset += this.limit
           }
           this.orderList = this.orderList.concat(list)
-        })
-        .finally(() => {
+        }).catch(({data,msg}) => {
+          if (data.length < this.limit) {
+            this.finished = true
+          }
+          this.$toast(msg)
+        }).finally(() => {
           this.loading = false
           this.refreshing = false
         })
