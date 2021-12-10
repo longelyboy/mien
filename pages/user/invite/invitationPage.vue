@@ -28,6 +28,7 @@ export default {
     return {
       code: '',
       showCode: false,
+      height: window.innerHeight
     }
   },
   computed: {
@@ -36,6 +37,7 @@ export default {
     })
   },
   created () {
+    console.log(this.height)
     this.getCode()
   },
   methods: {

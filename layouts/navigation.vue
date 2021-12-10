@@ -24,6 +24,6 @@ export default {
 
 <style lang="less" scoped>
 .page {
-  padding-bottom: 60px;
+  padding-bottom: 50px;
 }
 </style>
