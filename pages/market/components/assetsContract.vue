@@ -3,6 +3,7 @@
     v-model="isLoading"
     @refresh="onLoad"
   >
+  <!-- :immediate-check="false" -->
     <van-list
       :finished="finished"
       @load="onLoad"
@@ -121,7 +122,7 @@ export default {
       this.finished = false
       this.marketList({
         platform: this.platform,
-        type: 'swap'
+        type: 'swap' // 合约
       })
       this.finished = true
       this.isLoading = false

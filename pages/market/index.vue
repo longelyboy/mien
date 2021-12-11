@@ -15,7 +15,7 @@
           <span ref="tabs1" @click="liFn(1)">{{ $t('nav.contract') }}</span>
         </van-col>
         <van-col class="tabs2" span="8">
-          <span ref="tabs2" @click="liFn(2)">{{ $t('nav.spot') }}</span>
+          <span ref="tabs2" @click="liFn(2)">{{ $t('nav.spot')/* 现货*/ }}</span>
         </van-col>
       </van-row>
     </div>
@@ -39,8 +39,8 @@
             <nuxt-link to="/authorize">{{ $t('add') }}</nuxt-link>
           </div>
         </template>
-        <assets-list ref="assetsList" v-if="typeShow==2" :platform="item.label"></assets-list>
-        <assets-list-contract ref="assetsList1" v-else :platform="item.label"></assets-list-contract>
+        <assets-list ref="assetsList" v-if="typeShow==2" :platform="item.label"></assets-list> 
+        <assets-list-contract ref="assetsListContract" v-else :platform="item.label"></assets-list-contract> <!-- 合约 -->
       </van-tab>
     </van-tabs>
   </div>
@@ -74,7 +74,7 @@ export default {
     return {
       active: 0,
       account: '',
-      typeShow: 1
+      typeShow: 1,
     }
   },
   computed: {
@@ -90,16 +90,17 @@ export default {
         this.apiAccountBalanceSwap({ platform: this.platform[newVal].label }).then((res) => {
           this.account = res.data.free
         })
+      // this.marketList1(this.typeShow,this.platform[newVal].label)
       }else{
         this.account = ''
         this.apiAccountBalance({ platform: this.platform[newVal].label }).then((res) => {
           this.account = res.data.free
         })
+      // this.marketList1(this.typeShow,this.platform[newVal].label)
       }
      
     },
     typeShow (newVal) {
-
       if(newVal == 1){
         this.account = ''
         this.apiAccountBalanceSwap({ platform: this.platform[this.active].label }).then((res) => {
@@ -127,10 +128,16 @@ export default {
     
   },
   methods: {
+    ...mapActions({
+      apiAccountBalance: 'authorize/apiAccountBalance',
+      apiAccountBalanceSwap: 'authorize/apiSwapAccountBalance',
+      marketList: 'robot/marketList',
+      robotList: 'robot/robotList'
+    }),
     liFn(type) {
-      
       this.typeShow = type
-      
+      // const platform = !this.active ? 'okex' : 'binance'
+      // this.marketList1(type,platform)
       if (type === 1) {
         this.$refs.tabs1.style.fontWeight = '700'
         this.$refs.tabs2.style.fontWeight = '400'
@@ -139,13 +146,21 @@ export default {
         this.$refs.tabs2.style.fontWeight = '700'
       }
       this.$nextTick(() => {
-       this.$refs[type == 2 ? 'assetsList' : 'assetsList1'][0].loadData();
+       this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][0].onLoad();
+       if (this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'].length>1){
+         this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][1].onLoad();
+       }
       })
     },
-    ...mapActions({
-      apiAccountBalance: 'authorize/apiAccountBalance',
-      apiAccountBalanceSwap: 'authorize/apiSwapAccountBalance'
-    })
+    marketList1 (type,platform) {
+       this.marketList({
+        platform,
+        type: type == 1 ? 'swap' : 'spot' // 合约
+      })
+    }
+  },
+  created(){
+    // this.marketList1(1,'okex')
   }
 }
 </script>
