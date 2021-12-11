@@ -39,8 +39,8 @@
             <nuxt-link to="/authorize">{{ $t('add') }}</nuxt-link>
           </div>
         </template>
-        <assets-list ref="assetsList" v-if="typeShow==2" :platform="item.label"></assets-list> <!-- 现货 -->
-        <assets-list-contract ref="assetsList1" v-else :platform="item.label"></assets-list-contract>
+        <assets-list ref="assetsList" v-if="typeShow==2" :platform="item.label"></assets-list> 
+        <assets-list-contract ref="assetsListContract" v-else :platform="item.label"></assets-list-contract> <!-- 合约 -->
       </van-tab>
     </van-tabs>
   </div>
@@ -90,13 +90,13 @@ export default {
         this.apiAccountBalanceSwap({ platform: this.platform[newVal].label }).then((res) => {
           this.account = res.data.free
         })
-      this.marketList1(this.typeShow,this.platform[newVal].label)
+      // this.marketList1(this.typeShow,this.platform[newVal].label)
       }else{
         this.account = ''
         this.apiAccountBalance({ platform: this.platform[newVal].label }).then((res) => {
           this.account = res.data.free
         })
-      this.marketList1(this.typeShow,this.platform[newVal].label)
+      // this.marketList1(this.typeShow,this.platform[newVal].label)
       }
      
     },
@@ -136,8 +136,8 @@ export default {
     }),
     liFn(type) {
       this.typeShow = type
-      const platform = !this.active ? 'okex' : 'binance'
-      this.marketList1(type,platform)
+      // const platform = !this.active ? 'okex' : 'binance'
+      // this.marketList1(type,platform)
       if (type === 1) {
         this.$refs.tabs1.style.fontWeight = '700'
         this.$refs.tabs2.style.fontWeight = '400'
@@ -146,7 +146,8 @@ export default {
         this.$refs.tabs2.style.fontWeight = '700'
       }
       this.$nextTick(() => {
-       this.$refs[type == 2 ? 'assetsList' : 'assetsList1'][0].loadData();
+       this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][0].onLoad();
+       this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][1].onLoad();
       })
     },
     marketList1 (type,platform) {
@@ -157,7 +158,7 @@ export default {
     }
   },
   created(){
-    this.marketList1(1,'okex')
+    // this.marketList1(1,'okex')
   }
 }
 </script>

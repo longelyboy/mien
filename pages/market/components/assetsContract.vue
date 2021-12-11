@@ -3,8 +3,8 @@
     v-model="isLoading"
     @refresh="onLoad"
   >
+  <!-- :immediate-check="false" -->
     <van-list
-      :immediate-check="false"
       :finished="finished"
       @load="onLoad"
     >
