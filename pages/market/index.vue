@@ -146,8 +146,10 @@ export default {
         this.$refs.tabs2.style.fontWeight = '700'
       }
       this.$nextTick(() => {
-       this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][0].onLoad();
-       this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][1].onLoad();
+        this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][0].onLoad();
+        if(this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'].length>1){
+        this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][1].onLoad();
+        }
       })
     },
     marketList1 (type,platform) {
