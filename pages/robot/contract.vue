@@ -359,10 +359,8 @@ export default {
               }
           }else{
               for (let i = 0; i <arr2.length-this.max_order_count; i++) {
-                const obj = {}
-                obj.count = ''
-                obj.input = ''
-                this.listInput.pop(obj)
+                
+                this.listInput.pop()
               }
           }
           
