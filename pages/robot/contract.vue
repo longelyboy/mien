@@ -83,6 +83,7 @@
 
       <van-field
         v-model="max_order_count"
+        type="digit"
         :label="$t('number_of_orders')"
         :placeholder="$t('number_of_orders')"
         :rules="[{ required: true }]"
@@ -348,12 +349,21 @@ export default {
         }
 
         if (arr2.length != this.max_order_count) {
-          for (let i = 0; i < this.max_order_count - arr2.length; i++) {
-            const obj = {}
-            obj.count = ''
-            obj.input = ''
-            this.listInput.push(obj)
+          
+          if(this.max_order_count > arr2.length){
+              for (let i = 0; i < this.max_order_count - arr2.length; i++) {
+                const obj = {}
+                obj.count = ''
+                obj.input = ''
+                this.listInput.push(obj)
+              }
+          }else{
+              for (let i = 0; i <arr2.length-this.max_order_count; i++) {
+                
+                this.listInput.pop()
+              }
           }
+          
         }
         this.listInput.map((item, index) => {
           item.count = index + 1
