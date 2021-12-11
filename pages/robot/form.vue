@@ -67,12 +67,12 @@
         :rules="[{ required: true }]"
       />
 
-      <van-field
+      <!-- <van-field
         v-model="number"
         :label="$t('number_of_type')"
         :placeholder="$t('number_of_type')"
         :rules="[{ required: true}]"
-      />
+      /> -->
       <van-field
         v-model="stop_profit_rate"
         :label="$t('take_profit_ratio') + '(%)'"
@@ -104,7 +104,14 @@
         :placeholder="$t('cover_pullback')"
         :rules="[{ required: true }]"
       />
-      
+      <van-field name="radio" :label="$t('pageRobot.strategy_type')">
+        <template #input>
+          <van-radio-group v-model="recycle_status" direction="horizontal">
+            <van-radio :name="1">{{ $t('cycle_strategy') }} </van-radio>
+            <van-radio :name="0">{{ $t('single_strategy') }}</van-radio>
+          </van-radio-group>
+        </template>
+      </van-field>
       <van-field
         v-if="formType === 'create' && CHEKC_CDKEY"
         v-model="cd_key"
@@ -176,7 +183,7 @@ export default {
       marketPicker: false,
       market: '',
       money: '',
-      platform: 'huobi',
+      platform: 'okex',
       robot_id: '',
       market_id: '',
       first_order_value: '100',
@@ -247,7 +254,8 @@ export default {
         this.cover_callback_rate = robot.cover_callback_rate
         this.money = robot.money
         this.price = robot.price
-        this.listInput = []
+        this.listInput = [],
+        this.recycle_status = robot.recycle_status
       })
     } else {
       

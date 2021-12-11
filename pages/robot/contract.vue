@@ -83,6 +83,7 @@
 
       <van-field
         v-model="max_order_count"
+        type="digit"
         :label="$t('number_of_orders')"
         :placeholder="$t('number_of_orders')"
         :rules="[{ required: true }]"

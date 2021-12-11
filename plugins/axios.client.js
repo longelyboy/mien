@@ -18,11 +18,11 @@ export default function ({ store, $axios, redirect }) {
   $axios.onResponse(({ data }) => {
     // return Promise.resolve(data)
     const { code } = data
-    if (code !== 1) {
-      return Promise.reject(data)
-    }
     if (code === 10001) {
       redirect('/sign/login')
+    }
+    if (code !== 1) {
+      return Promise.reject(data)
     }
   })
 
