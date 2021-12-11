@@ -162,12 +162,29 @@
         is-link
         @click="handleLink('/user/invite/poster')"
       />
+    </van-cell-group>
+
+    <van-cell-group>
       <van-cell
         icon="orders-o"
         :title="$t('pageUser.about')"
         is-link
         @click="goAbout()"
       />
+      <van-cell
+        icon="question-o"
+        :title="$t('pageUser.operating')"
+        is-link
+        @click="goOperate()"
+      />
+
+      <van-cell
+        icon="chart-trending-o"
+        :title="$t('pageUser.report')"
+        is-link
+        @click="goReport()"
+      />
+
       <van-cell
         icon="chat-o"
         :title="$t('contact')"
@@ -249,6 +266,24 @@ export default {
         params: {
           url: this.initInfo.system_user_agreement,
           title: '服务协议'
+        }
+      })
+    },
+    goOperate() {
+      this.$router.push({
+        name: 'common-article',
+        params: {
+          url: this.initInfo.system_help_center,
+          title: '操作教程'
+        }
+      })
+    },
+    goReport() {
+      this.$router.push({
+        name: 'common-article',
+        params: {
+          url: this.initInfo.system_help_report,
+          title: '分析报告'
         }
       })
     },
