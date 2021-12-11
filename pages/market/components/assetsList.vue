@@ -112,6 +112,7 @@ export default {
       return this.markets(this.platform) || []
     }
   },
+  create() { },
   methods: {
     ...mapActions({
       marketList: 'robot/marketList',
