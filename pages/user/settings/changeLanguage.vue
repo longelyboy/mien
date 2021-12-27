@@ -17,7 +17,8 @@ export default {
     return {
       langs: {
         zh: '中文',
-        en: 'English'
+        en: 'English',
+        hk: '中文繁體',
       }
     }
   },

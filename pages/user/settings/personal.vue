@@ -65,6 +65,15 @@ export default {
         edit_nick: 'Edit nickname',
         please: 'Please enter a nickname',
         edit_sign: 'Edit personal signature'
+      },
+      hk: {
+        title: '個人資料',
+        head: '頭像',
+        nick: '暱稱',
+        signature: '個人簽名',
+        edit_nick: '編輯暱稱',
+        please: '請輸入暱稱',
+        edit_sign: '編輯個人簽名'
       }
     }
   },

@@ -139,6 +139,16 @@ export default {
         usdt: 'USDT Assets',
         integral: 'Integral Assets',
         Integralbills: 'Integral Bills'
+      },
+      hk: {
+        title: '我的資產',
+        total: '總資產折合',
+        receipt: '充值',
+        withdraw: '提幣',
+        usdt: 'USDT資產',
+        integral: '積分資產',
+        Integraldraw: '積分抽獎',
+        Integralbills: '積分賬單'
       }
     }
   },
@@ -258,7 +268,7 @@ export default {
       })
     },
     onCopy () {
-      this.$toast('复制成功')
+      this.$toast(this.$t('msg.Copy_successfully'))/* '复制成功' */
     },
     onLoad () {
       this.loadBillList()

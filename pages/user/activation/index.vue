@@ -33,17 +33,17 @@
       </van-list>
     </van-pull-refresh>
     <!-- <password-confirm :show="showPwd" @close="showPwd = false" @confrim="buyCdkey" /> -->
-    <van-dialog v-model="showPwd" title="购买激活码" show-cancel-button @confirm="buyCdkey">
+    <van-dialog v-model="showPwd" :title="$t('msg.Purchase_activation_code')/*购买激活码*/" show-cancel-button @confirm="buyCdkey">
       <div class="dialog-1">
         <van-cell>
-          <span class="label">购买数量</span>
+          <span class="label">{{ $t('msg.Purchase_quantity') }}<!-- 购买数量 --></span>
           <span>1</span>
         </van-cell>
         <van-cell>
-          <span class="label">交易密码</span>
-          <input v-model="pwd" type="password" placeholder="请输入交易密码">
+          <span class="label">{{ $t('msg.transaction_password') }}<!-- 交易密码 --></span>
+          <input v-model="pwd" type="password" :placeholder="$t('msg.Please_enter_transaction_password')/*请输入交易密码*/">
         </van-cell>
-        <div class="tip">支付：<span>{{ initInfo.cdkey_price }}</span> USDT</div>
+        <div class="tip">{{ $t('msg.To_pay') }}<!-- 支付： --><span>{{ initInfo.cdkey_price }}</span> USDT</div>
       </div>
     </van-dialog>
   </div>
@@ -65,7 +65,15 @@ export default {
         state: '已使用',
         robot: '机器人'
       },
-      en: { title: 'CD-Key', buy: 'Buy', key: 'CD-Key', time: 'Get Time', state: 'Used', robot: 'Robot' }
+      en: { title: 'CD-Key', buy: 'Buy', key: 'CD-Key', time: 'Get Time', state: 'Used', robot: 'Robot' },
+      hk: {
+        title: '激活碼',
+        buy: '購買激活碼',
+        key: '激活碼',
+        time: '獲得時間',
+        state: '已使用',
+        robot: '機械人'
+      }
     }
   },
   data () {
@@ -106,7 +114,7 @@ export default {
       this.onLoad()
     },
     onCopy () {
-      this.$toast('复制成功')
+      this.$toast(this.$t('msg.Copy_successfully'))/* '复制成功' */
     },
     buyCdkey (password) {
       this.showPwd = false

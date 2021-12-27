@@ -50,6 +50,13 @@ export default {
         day: ' day',
         tip1: 'Your VIP status expires at',
         tip2: 'Your vip status has expired!'
+      },
+      hk: {
+        price: '售價',
+        buy: '購買',
+        day: '天',
+        tip1: '您的vip身份到期時間為',
+        tip2: '您的vip身份已到期！'
       }
     }
   },

@@ -49,6 +49,14 @@ export default {
         code: 'Code',
         code_please: 'Please fill in the code',
         send: 'Send Code'
+      },
+      hk: {
+        title: '綁定郵箱',
+        email: '郵箱',
+        email_please: '請填寫郵箱',
+        code: '驗證碼',
+        code_please: '請填寫驗證碼',
+        send: '發送驗證碼'
       }
     }
   },
@@ -75,7 +83,7 @@ export default {
             this.$toast(msg)
           })
       } else {
-        this.$toast('邮箱号格式不正确')
+        this.$toast(this.$t('msg.The_mailbox_number_format_is_incorrect'))/* '邮箱号格式不正确' */
       }
     },
     getTime () {

@@ -96,6 +96,11 @@ export default {
         add: 'Add API Key',
         not: 'You have not added the platform\'s API',
         expired: 'The platform\'s API is no longer available'
+      },
+      hk: {
+        add: '添加API Key',
+        not: '您還未添加該平台的API',
+        expired: '該平台的API已失效',
       }
     }
   },
@@ -105,7 +110,7 @@ export default {
       showApi: false,
       api: '',
       active: 0,
-      actions: [{ name: '查看API Key' }, { name: '删除' }, { name: '重置' }]
+      actions: [{ name: `${this.$t('msg.Check')/* 查看 */}API Key` }, { name: this.$t('msg.delete')/* '删除' */ }, { name: this.$t('msg.Reset')/* '重置' */ }]
     }
   },
   computed: {
@@ -147,7 +152,7 @@ export default {
     removeApi () {
       this.show = false
       this.$dialog.confirm({
-        message: '确定删除此平台API？'
+        message: this.$t('msg.Confirm_to_delete_this_platform_API'), // '确定删除此平台API？'
       }).then((res) => {
         this.$toast.loading()
         this.removeApiAccount({ platform: this.platform[this.active].label }).then((res) => {

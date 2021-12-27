@@ -58,7 +58,7 @@ export default {
           return
         }
       }
-       if (this.loading) {
+      if (this.loading) {
         this.refreshing = false
       }
       const payload = {

@@ -15,7 +15,7 @@
     <menu-pic></menu-pic>
     <markets></markets>
     <div v-show="show" class="van-overlay" @click="show=false">
-      <p>敬请期待</p>
+      <p>{{ $t('msg.Stay_tuned') }}<!-- 敬请期待 --></p>
     </div>
   </div>
 </template>

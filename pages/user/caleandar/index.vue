@@ -24,6 +24,10 @@ export default {
       en: {
         log: 'Transaction Log',
         order: 'Trade Orders'
+      },
+      hk: {
+        log: '交易日誌',
+        order: '交易訂單'
       }
     }
   },

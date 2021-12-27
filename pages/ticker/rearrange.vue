@@ -57,6 +57,11 @@ export default {
         title: 'Custom Sort',
         left: 'Currency',
         right: 'Drag Sort'
+      },
+      hk: {
+        title: '自定義排序',
+        left: '貨幣',
+        right: '拖動排序'
       }
     }
   },

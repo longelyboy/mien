@@ -123,6 +123,21 @@ export default {
         card_please: 'Please fill in the ID number',
         card_front: 'Front of ID card',
         card_back: 'Reverse of ID card'
+      },
+      hk: {
+        title: '實名認證',
+        nationality: '國籍',
+        nationality_please: '請填寫國籍',
+        address: '住址',
+        address_please: '請填寫住址',
+        name: '真實姓名',
+        name_please: '請填寫真實姓名',
+        birthday: '生日',
+        birthday_please: '請選擇生日',
+        card: '身份證號',
+        card_please: '請填寫身份證號',
+        card_front: '身份證正面照',
+        card_back: '身份證反面照'
       }
     }
   },

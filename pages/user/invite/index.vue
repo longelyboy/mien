@@ -77,6 +77,23 @@ export default {
         result: 'Performance',
         yes: '是',
         no: '否'
+      },
+      hk: {
+        total: '累計邀請分潤獎勵',
+        invite: '好友邀請人數',
+        active: '好友激活人數',
+        number: '好友註冊人數',
+        number_1: '一級好友數',
+        number_2: '二級好友數',
+        number_3: '其餘好友數',
+        you_level: '代理身份',
+        partner: '合伙人',
+        user: '用户',
+        agent: '合伙人身份',
+        ratio: '分潤比例',
+        result: '總推廣業績',
+        yes: '是',
+        no: '否'
       }
     }
   },

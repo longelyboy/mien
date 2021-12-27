@@ -23,21 +23,20 @@
     <van-dialog v-model="showPop" :title="$t('title2')" show-cancel-button @confirm="showPop=false">
       <van-cell-group>
         <van-field :label="$t('phone')" :value="mobile" readonly />
-        <van-field v-model="vcode" :label="$t('code')" :placeholder="$t('code_please')" 
-        >
-            <template #button>
-              <van-button
-                size="small"
-                type="primary"
-                block
-                :disabled="times !== 60"
-                @click.prevent="handleGetCode"
-              >
-                <template v-if="times === 60">{{ $t('send') }}</template>
-                <template v-else>{{ times }}s</template>
-              </van-button>
-            </template>
-      </van-field>        
+        <van-field v-model="vcode" :label="$t('code')" :placeholder="$t('code_please')">
+          <template #button>
+            <van-button
+              size="small"
+              type="primary"
+              block
+              :disabled="times !== 60"
+              @click.prevent="handleGetCode"
+            >
+              <template v-if="times === 60">{{ $t('send') }}</template>
+              <template v-else>{{ times }}s</template>
+            </van-button>
+          </template>
+        </van-field>
       </van-cell-group>
     </van-dialog>
   </div>
@@ -74,6 +73,17 @@ export default {
         code: 'Code',
         code_please: 'Please enter the code',
         send: 'Send'
+      },
+      hk: {
+        title: '支付密碼',
+        tip1: '請輸入支付密碼，以驗證身份',
+        tip2: '請設置支付密碼，用於支付驗證',
+        forget: '忘記支付密碼',
+        title2: '驗證身份',
+        phone: '手機號',
+        code: '驗證碼',
+        code_please: '請輸入驗證碼',
+        send: '發送'
       }
     }
   },
@@ -86,7 +96,7 @@ export default {
       old_pwd: '',
       pwd: '',
       vcode: '',
-      times: 60      
+      times: 60
     }
   },
   computed: {
@@ -155,19 +165,18 @@ export default {
           this.times = 60
         }
       }, 1000)
-    },    
+    },
     handleGetCode () {
       const username = this.mobile
-     this.getCode(username)
-          .then(({ msg }) => {
-            this.$toast(msg)
-            this.getTime()
-          })
-          .catch(({ msg }) => {
-            this.$toast(msg)
-          })
-       
-    },       
+      this.getCode(username)
+        .then(({ msg }) => {
+          this.$toast(msg)
+          this.getTime()
+        })
+        .catch(({ msg }) => {
+          this.$toast(msg)
+        })
+    },
     onDelete () {
       const value = this.value
       this.value = value.substring(0, value.length - 1)

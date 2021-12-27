@@ -163,7 +163,26 @@ export default {
         memo: 'notes',
         submit: 'Send',
         tips: 'Minimum withdrawal amount'
-      }
+      },
+      hk: {
+        title: '提幣',
+        address: '收款地址',
+        address_please: '請輸入收款地址',
+        memo_please: '請輸入memo',
+        number: '提幣數量',
+        number_please: '請輸入提幣數量',
+        balance: '當前余額',
+        extract_all: '全部',
+        fee: '手續費',
+        fee_please: '請填寫手續費',
+        pay_pwd: '支付密碼',
+        pwd_please: '請填寫支付密碼',
+        no_pay_pwd: '還未設置支付密碼',
+        setting: '去設置',
+        memo: '備註',
+        submit: '發送',
+        tips: '最小提幣金額'
+      },
     }
   },
   data () {

@@ -57,7 +57,6 @@
                     >
                       {{ $t('nav.contract') }}
                     </van-tag>
-
                   </div>
                   <div
                     v-if="robot"
@@ -133,19 +132,17 @@ export default {
     },
     goDetail (item) {
       this.$nextTick(() => {
-
-        if(item.type == 2){
-            this.$router.push({
+        if (item.type == 2) {
+          this.$router.push({
             name: 'robot-tract',
             query: { market_id: item.market_id }
           })
-        }else{
+        } else {
           this.$router.push({
             name: 'robot',
             query: { market_id: item.market_id }
           })
         }
-        
       })
     },
     getDeal (values) {

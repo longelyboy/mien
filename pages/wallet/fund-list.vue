@@ -66,6 +66,12 @@ export default {
         balance: 'Balance',
         receipt: 'Receipt',
         withdraw: 'withdraw'
+      },
+      hk: {
+        total: '總資產',
+        balance: '餘額',
+        receipt: '收款',
+        withdraw: '提幣'
       }
     }
   },

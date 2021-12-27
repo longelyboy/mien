@@ -51,7 +51,6 @@
               <div class="user-level">{{ userInfo.level_name }}</div>
 
               <!-- <div class="user-account">{{ userInfo.signature }}</div> -->
-              
               <div v-if="BUY_PACKAGE" class="user-tip">
                 <template v-if="userInfo.vip_deadline > 0">
                   {{ `${$t('tip1')}：${ format(userInfo.vip_deadline, '{y}-{m}-{d}') }` }}
@@ -200,6 +199,12 @@ export default {
         language: 'Change Language',
         tip1: 'Your VIP status expires at',
         tip2: 'Your vip status has expired!'
+      },
+      hk: {
+        contact: '聯繫我們',
+        language: '選擇語言',
+        tip1: '您的vip身份到期時間為',
+        tip2: '您的vip身份已到期'
       }
     }
   },
@@ -248,7 +253,7 @@ export default {
         name: 'common-article',
         params: {
           url: this.initInfo.system_user_agreement,
-          title: '服务协议'
+          title: this.$t('pageUser.about') // '服务协议'
         }
       })
     },
@@ -260,7 +265,7 @@ export default {
         name: 'common-article',
         params: {
           url: this.initInfo.system_customer_service,
-          title: '联系我们'
+          title: this.$t('msg.contact_us') // '联系我们'
         }
       })
     }

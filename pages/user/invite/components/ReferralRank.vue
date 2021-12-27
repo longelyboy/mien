@@ -47,6 +47,16 @@ export default {
         time: 'Time',
         yeji: 'Performance',
         up_level: 'Up Level'
+      },
+      hk: {
+        title: '邀請列表',
+        id: '用户ID',
+        account: '賬號',
+        level: '級別',
+        profit: '量化盈利',
+        time: '時間',
+        yeji: '推廣業績',
+        up_level: '提升用戶級別'
       }
     }
   },
@@ -78,7 +88,7 @@ export default {
     },
     changeUserLevel(uid) {
       this.$dialog.confirm({
-        title: '是否要提升该用户等级？'
+        title: this.$t('msg.Do_you_want_to_upgrade_the_user_level') // '是否要提升该用户等级？'
       })
         .then(() => {
           this.changeLevel({ uid }).then((res) => {

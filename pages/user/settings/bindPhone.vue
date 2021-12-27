@@ -62,6 +62,14 @@ export default {
         code: 'Code',
         code_please: 'Please fill in the code',
         send: 'Send Code'
+      },
+      hk: {
+        title: '綁定手機',
+        phone: '手機',
+        phone_please: '請填寫手機',
+        code: '驗證碼',
+        code_please: '請填寫驗證碼',
+        send: '發送驗證碼'
       }
     }
   },
@@ -92,7 +100,7 @@ export default {
             this.$toast(msg)
           })
       } else {
-        this.$toast('手机号格式不正确')
+        this.$toast(this.$t('msg.Phone_number_format_is_not_correct'))/* '手机号格式不正确' */
       }
     },
     getTime () {

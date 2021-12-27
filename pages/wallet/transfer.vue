@@ -65,7 +65,7 @@
         </template>
       </van-field>
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">提交</van-button>
+        <van-button round block type="info" native-type="submit">{{ $t('actions.submit') }}<!-- 提交 --></van-button>
       </div>
     </van-form>
   </div>
@@ -101,7 +101,20 @@ export default {
         extract_all: 'Extract all',
         to_id: 'To ID',
         to_id_please: 'Please To ID'
-      }
+      },
+      hk: {
+        title: '轉賬',
+        number: '轉賬數量',
+        number_please: '請輸入轉賬數量',
+        balance: '當前余額',
+        pay_pwd: '支付密碼',
+        pwd_please: '請填寫支付密碼',
+        no_pay_pwd: '還未設置支付密碼',
+        setting: '去設置',
+        extract_all: '全部',
+        to_id: '對方用戶id',
+        to_id_please: '請輸入對方用戶id'
+      },
     }
   },
   data () {

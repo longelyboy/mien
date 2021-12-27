@@ -33,6 +33,12 @@ export default {
         get: 'Get it',
         key: 'CD-Key',
         please: 'Please enter the CD-Key'
+      },
+      hk: {
+        title: '輸入激活碼',
+        get: '領取',
+        key: '激活碼',
+        please: '請輸入激活碼'
       }
     }
   },
@@ -49,8 +55,8 @@ export default {
     onActive () {
       this.$dialog
         .confirm({
-          title: '提示',
-          message: `领取该激活码? \n ${this.activationCode}`
+          title: this.$t('msg.hint')/* '提示' */,
+          message: `${this.$t('msg.Get_the_activation_code')/* 领取该激活码 */}? \n ${this.activationCode}`
         })
         .then(() => {
           this.$toast.loading()

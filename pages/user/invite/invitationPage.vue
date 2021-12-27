@@ -3,15 +3,15 @@
     <div class="conter">
       <van-icon class="goBack" size="18" color="#fff" name="arrow-left" @click="goBack" />
       <p class="imger"><img src="../../../assets/images/logo.png" alt=""></p>
-      <p>邀你一起参与MIEN交易所</p>
+      <p>{{ $t('msg.Invite_you_to_participate_in_MIEN_Exchange') }}<!-- 邀你一起参与MIEN交易所 --></p>
     </div>
     <div class="bottom">
       <div class="logo">
         <img src="../../../assets/images/InvitationPageLogo.png" alt="">
       </div>
       <div class="bottom_conter">
-        <p>注册即可交易</p>
-        <p class="text">长按识别二维码 邀请您加入MIEN</p>
+        <p>{{ $t('msg.Register_to_trade') }}<!-- 注册即可交易 --></p>
+        <p class="text">{{ $t('msg.Long_press_to_identify_the_QR_code') }}<!-- 长按识别二维码 --> {{ $t('msg.Invite_you_to_join_MIEN') }}<!-- 邀请您加入MIEN --></p>
       </div>
       <div class="qrCodeDom">
         <div id="code" class="code"></div>

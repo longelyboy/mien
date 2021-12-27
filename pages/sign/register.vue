@@ -205,7 +205,7 @@ export default {
         name: 'common-article',
         params: {
           url: this.initInfo.system_user_agreement,
-          title: '用户协议'
+          title: this.$t('msg.User_Agreement')/* '用户协议' */
         }
       })
     },

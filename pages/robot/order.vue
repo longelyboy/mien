@@ -27,17 +27,20 @@
                 v-if="item.side == 1"
                 class="status"
                 style="color: red; opacity: 0.8"
-              >{{ $t('sell_out') }}</div>
+              >
+                {{ $t('sell_out') }}
+              </div>
               <div
                 v-else
                 class="status"
                 style="color: green"
-              >{{ $t('buy_in') }}</div>
+              >
+                {{ $t('buy_in') }}
+              </div>
             </div>
             <div class="info">
               <div v-if="item.type == 1">
                 {{ $t('turnover') }}<span>{{ Number(item.deal_money) | numberFormat(8) }} {{ item.money }}</span>
-                
               </div>
               <div v-if="item.type == 2">
                 {{ $t('turnover') }}<span>{{ Number(item.deal_amount) | numberFormat(8) }} {{ $t('zhang') }}</span>
@@ -50,7 +53,7 @@
               <div v-if="item.type == 2">
                 {{ $t('own_positions') }}<span>{{ Number(item.deal_money) | numberFormat(8) }} {{ item.money }}</span>
               </div>
-              
+
               <div>
                 {{ $t('price') }}<span>{{ Number(item.price) | numberFormat(8) }} {{ item.money }}</span>
               </div>

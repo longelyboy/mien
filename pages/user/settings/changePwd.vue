@@ -62,6 +62,13 @@ export default {
         new: 'New Password',
         confirm: 'Confirm Password',
         please: 'Please fill in '
+      },
+      hk: {
+        title: '修改密碼',
+        old: '舊密碼',
+        new: '新密碼',
+        confirm: '確認密碼',
+        please: '請填寫'
       }
     }
   },

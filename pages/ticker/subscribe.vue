@@ -53,6 +53,10 @@ export default {
       en: {
         title: 'Custom Ticker',
         placeholder: 'Please enter a search term'
+      },
+      hk: {
+        title: '自定義行情',
+        placeholder: '請輸入搜索關鍵詞'
       }
     }
   },

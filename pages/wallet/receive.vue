@@ -75,7 +75,12 @@ export default {
         tip: '提示',
         copy: '复制'
       },
-      en: { title: ' Receipt address', tip: 'Tips', copy: 'Copy' }
+      en: { title: ' Receipt address', tip: 'Tips', copy: 'Copy' },
+      hk: {
+        title: '收款地址',
+        tip: '提示',
+        copy: '復製'
+      }
     }
   },
   data () {
@@ -112,7 +117,7 @@ export default {
         })
     },
     onCopy () {
-      this.$toast('复制成功')
+      this.$toast(this.$t('msg.Copy_successfully'))/* '复制成功' */
     },
     switchTab (name) {
       this.loadData()

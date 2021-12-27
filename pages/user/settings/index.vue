@@ -91,6 +91,19 @@ export default {
         tip: 'Tips',
         tip_msg: 'Whether to log out of the current account',
         language: 'Change Language'
+      },
+      hk: {
+        title: '設置',
+        info: '個人資料',
+        bind_phone: '綁定手機',
+        bind_email: '綁定郵箱',
+        pwd_login: '登錄密碼',
+        pwd_pay: '支付密碼',
+        contact: '聯繫我們',
+        exit: '退出登錄',
+        tip: '提示',
+        tip_msg: '是否退出當前賬號',
+        language: '選擇語言'
       }
     }
   },

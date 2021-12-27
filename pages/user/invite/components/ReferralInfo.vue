@@ -2,12 +2,12 @@
   <div>
     <div v-if="info" class="user-info">
       <div class="tag">
-        您的等级：{{ info.my_info.is_partner === 1 ? '合伙人' : '用户' }} <van-tag round color="#7232dd">Lv.{{ info.my_info.level_id }}</van-tag>
+        {{ $t('msg.Your_level') }}<!-- 您的等级： -->{{ info.my_info.is_partner === 1 ? $t('msg.partner')/*'合伙人'*/ : $t('msg.user')/*'用户'*/ }} <van-tag round color="#7232dd">Lv.{{ info.my_info.level_id }}</van-tag>
       </div>
       <van-row class="info" type="flex" justify="space-between">
-        <van-col :span="8"><p class="label">代理身份</p><p class="value">{{ info.my_info.level_name }}</p></van-col>
-        <van-col :span="8"><p class="label">分红比例(%)</p><p class="value">{{ info.my_info.profit_rate }}</p></van-col>
-        <van-col :span="8"><p class="label">总推广业绩</p><p class="value">{{ info.my_info.total }}</p></van-col>
+        <van-col :span="8"><p class="label">{{ $t('msg.Agent_status') }}<!-- 代理身份 --></p><p class="value">{{ info.my_info.level_name }}</p></van-col>
+        <van-col :span="8"><p class="label">{{ $t('msg.Dividend_ratio') }}<!-- 分红比例 -->(%)</p><p class="value">{{ info.my_info.profit_rate }}</p></van-col>
+        <van-col :span="8"><p class="label">{{ $t('msg.Total_promotion_performance') }}<!-- 总推广业绩 --></p><p class="value">{{ info.my_info.total }}</p></van-col>
       </van-row>
     </div>
     <div class="referral-info">
@@ -71,6 +71,15 @@ export default {
         number_1: 'Number of first-level friends',
         number_2: 'Number of secondary friends',
         number_3: 'Number of third-level friends'
+      },
+      hk: {
+        total: '累計邀請分潤獎勵',
+        invite: '好友邀請人數',
+        active: '好友激活人數',
+        number: '好友註冊人數',
+        number_1: '直屬好友數',
+        number_2: '隸屬好友數',
+        number_3: '其餘好友數'
       }
     }
   },

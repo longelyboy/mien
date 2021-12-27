@@ -3,28 +3,28 @@
     <van-nav-bar :title="$t('title')" left-arrow @click-left="$router.back()" />
     <div class="conter">
       <div class="top">
-        <p>好友: {{invite_count}}</p>
+        <p>{{ $t('msg.Buddy') }}<!-- 好友 -->: {{ invite_count }}</p>
         <p><img src="../../../assets/images/logo.png" alt=""></p>
       </div>
       <div class="Invitation">
-        <p class="h3">邀请中心</p>
-        <p class="p1">邀请好友，享更多权益</p>
+        <p class="h3">{{ $t('msg.Invitation_center') }}<!-- 邀请中心 --></p>
+        <p class="p1">{{ $t('msg.Invite_friends_to_enjoy_more_rights') }}<!-- 邀请好友，享更多权益 --></p>
       </div>
       <div v-for="(item,index) in posterList" :key="index" class="posterList" >
         <div class="h4">
           <p>{{ item.level_name }}</p>
-          <p class="bluePrice">仅售{{ item.need_recharge_num }}USDT</p>
+          <p class="bluePrice">{{ $t('msg.Only_for_sale') }}<!-- 仅售 -->{{ item.need_recharge_num }}USDT</p>
         </div>
         <p class="describe">{{ item.remark }}</p>
-        <p class="blueBuy" @click="goReceive" >立即购买<span><img src="../../../assets/images/BlueNext.png" alt=""></span></p>
+        <p class="blueBuy" @click="goReceive" >{{ $t('msg.Buy_now') }}<!-- 立即购买 --><span><img src="../../../assets/images/BlueNext.png" alt=""></span></p>
       </div>
     </div>
     <div class="copy">
       <div class="copyDiv">
-        <p>邀请码: <span>{{ userInfo.invitation_code }}</span>  <img v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_code" src="../../../assets/images/copy.png" alt=""></p>
+        <p>{{ $t('msg.Invitation_code') }}<!-- 邀请码 -->: <span>{{ userInfo.invitation_code }}</span>  <img v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_code" src="../../../assets/images/copy.png" alt=""></p>
         <div class="btn">
-          <div v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_url" class="btnWhite">复制邀请链接</div>
-          <div class="btnBlue" @click="goInvitationPage">生成邀请海报</div>
+          <div v-clipboard:success="onCopy" v-clipboard:copy="userInfo.invitation_url" class="btnWhite">{{ $t('msg.Copy_invitation_link') }}<!-- 复制邀请链接 --></div>
+          <div class="btnBlue" @click="goInvitationPage">{{ $t('msg.Generate_invitation_poster') }}<!-- 生成邀请海报 --></div>
         </div>
       </div>
     </div>
@@ -43,6 +43,10 @@ export default {
       en: {
         title: 'Invitation to register',
         invitation_code: 'Invitation Code'
+      },
+      hk: {
+        title: '邀請註冊',
+        invitation_code: '點擊複製邀請碼'
       }
     }
   },
@@ -88,7 +92,7 @@ export default {
       this.$router.push({ path: '/wallet/receive', query: { symbol: 'USDT-TRC' }})
     },
     onCopy () {
-      this.$toast('复制成功')
+      this.$toast(this.$t('msg.Copy_successfully')/* '复制成功' */)
     }
   }
 }

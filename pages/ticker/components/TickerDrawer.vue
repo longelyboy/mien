@@ -1,5 +1,5 @@
 <template>
-  <van-popup v-model="show" position="right" :style="{ height: '100%' }">内容</van-popup>
+  <van-popup v-model="show" position="right" :style="{ height: '100%' }">{{ $t('msg.content') }}<!-- 内容 --></van-popup>
 </template>
 
 <script>

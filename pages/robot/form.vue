@@ -17,9 +17,8 @@
         style="background:#F5F6F7;color:#333;font-weight: 700;"
         @click="onMarket"
       />
-      <h3 class="title">预设策略</h3>
+      <h3 class="title">{{ $t('msg.Default_strategy') }}<!-- 预设策略 --></h3>
       <van-row class="preset">
-        
         <van-col>
           <van-button
             block
@@ -27,7 +26,7 @@
             :type="preset === 3 ? 'primary' : 'default'"
             @click="changePreset(3)"
           >
-            稳健
+            {{ $t('msg.steady') }}<!-- 稳健 -->
           </van-button>
         </van-col>
         <van-col>
@@ -37,11 +36,11 @@
             :type="preset === 4 ? 'primary' : 'default'"
             @click="changePreset(4)"
           >
-            自定义
+            {{ $t('msg.customize') }}<!-- 自定义 -->
           </van-button>
         </van-col>
       </van-row>
-       <van-field
+      <van-field
         v-model="first_order_value"
         :label="$t('first_order_amount') + '(' + money + ')'"
         :placeholder="$t('first_order_amount')"
@@ -51,10 +50,10 @@
       <van-field name="radio" label="">
         <template #input>
           <van-radio-group v-model="checked" direction="horizontal">
-            <van-radio :name="1">等额</van-radio>
-            <van-radio :name="2">倍额</van-radio>
+            <van-radio :name="1">{{ $t('msg.Equal_amount') }}<!-- 等额 --></van-radio>
+            <van-radio :name="2">{{ $t('msg.Multiple') }}<!-- 倍额 --></van-radio>
             <van-radio :name="3">
-              差额
+              {{ $t('msg.difference') }}<!-- 差额 -->
             </van-radio>
           </van-radio-group>
         </template>
@@ -144,7 +143,7 @@
         <ul classs="listInput">
           <li v-for="(item,index) in listInput" :key="index" class="list" style="overflow: hidden;text-align: right;border: none;padding:10px;border-bottom: 1px solid #ebedf0;">
             <span v-if="index===0" style=" float: left;" class="list_span">{{ $t('Cover') }}</span>
-            <span v-else style=" float: left;" class="list_span">第{{ item.count }}次补仓</span>
+            <span v-else style=" float: left;" class="list_span">{{ $t('msg.First') }}<!-- 第 -->{{ item.count }}{{ $t('msg.Sub-call') }}<!-- 次补仓 --></span>
             <i style=" float: right;" class="list_i">%</i>
             <input v-model="item.input" class="list_input" min="0.01" max="50" type="number" style=" float: right;border:none;margin-right:10px;text-align:right;" @input="handleInput(e,item)" >
             <!-- @input="inputMaxL = /^\d+\.?\d{0,1}$/.test(item.input) ? null : item.input.length - 1" -->
@@ -152,7 +151,7 @@
           <!--  -->
           </li>
         </ul>
-        <div class="van-button--info" @click="buttoninfo">确定</div>
+        <div class="van-button--info" @click="buttoninfo">{{ $t('actions.confirm') }}<!-- 确定 --></div>
       </div>
     <!-- </div> -->
     </van-popup>
@@ -171,6 +170,9 @@ export default {
       },
       en: {
         tip: 'Start robot minimum balance'
+      },
+      hk: {
+        tip: '啟動機械人最小餘額'
       }
     }
   },
@@ -189,19 +191,19 @@ export default {
       first_order_value: '100',
       max_order_count: '',
       stop_profit_rate: '',
-      number:0,
+      number: 0,
       stop_profit_callback_rate: '',
       cover_rate: '',
       cover_callback_rate: '',
       price: '',
       cd_key: '',
-      recycle_status:0,
+      recycle_status: 0,
       show: false,
       listInput: [],
-      robotPrice:{},
-      contract_size:0,
-      defaultStrategy:{},
-      customStrateg:{}
+      robotPrice: {},
+      contract_size: 0,
+      defaultStrategy: {},
+      customStrateg: {}
     }
   },
   computed: {
@@ -216,30 +218,29 @@ export default {
     marketLists() {
       return this.markets(this.platform) || []
     },
-    firstOrderValueU(){
-      //张数 * 面值 * 价格 /  20  （marketList）
-      const first_order_value = +this.first_order_value;
-      const price = +this.price || 1;
-      const contractSize = +this.contract_size;
-      return (first_order_value * contractSize * price / 20).toFixed(6);
+    firstOrderValueU() {
+      // 张数 * 面值 * 价格 /  20  （marketList）
+      const first_order_value = +this.first_order_value
+      const price = +this.price || 1
+      const contractSize = +this.contract_size
+      return (first_order_value * contractSize * price / 20).toFixed(6)
     }
   },
 
   async created() {
-    if(this.$route.query.data){
-      this.queryData = JSON.parse(this.$route.query.data);
+    if (this.$route.query.data) {
+      this.queryData = JSON.parse(this.$route.query.data)
     }
-    
+
     this.formType = this.$route.query.type
     if (this.formType === 'edit') {
       const robot = (this.robot = this.robotList.find(
         item => this.$route.query.robot_id === item.id
       ))
-      this.queryData = robot;
+      this.queryData = robot
       // this.listInput [ {count: 1,input: ""} ]
       console.log(robot)
       this.$nextTick(() => {
-        
         this.platform = robot.platform
         this.checked = robot.c_type
         this.market = robot.market_name
@@ -254,11 +255,10 @@ export default {
         this.cover_callback_rate = robot.cover_callback_rate
         this.money = robot.money
         this.price = robot.price
-        this.listInput = [],
+        this.listInput = []
         this.recycle_status = robot.recycle_status
       })
     } else {
-      
       const markets = this.queryData
       this.platform = this.$route.query.platform
       this.market = markets.market_name
@@ -267,13 +267,10 @@ export default {
     }
 
     this.marketList({
-        platform: this.platform,
-        type: 'swap'
-      })
-      await this.getStrategy();
-   
-     
-   
+      platform: this.platform,
+      type: 'swap'
+    })
+    await this.getStrategy()
   },
   methods: {
     showSetting() {
@@ -315,21 +312,18 @@ export default {
         }
 
         if (arr2.length != this.max_order_count) {
-          
-          if(this.max_order_count > arr2.length){
-              for (let i = 0; i < this.max_order_count - arr2.length; i++) {
-                const obj = {}
-                obj.count = ''
-                obj.input = ''
-                this.listInput.push(obj)
-              }
-          }else{
-              for (let i = 0; i <arr2.length-this.max_order_count; i++) {
-                
-                this.listInput.pop()
-              }
+          if (this.max_order_count > arr2.length) {
+            for (let i = 0; i < this.max_order_count - arr2.length; i++) {
+              const obj = {}
+              obj.count = ''
+              obj.input = ''
+              this.listInput.push(obj)
+            }
+          } else {
+            for (let i = 0; i < arr2.length - this.max_order_count; i++) {
+              this.listInput.pop()
+            }
           }
-          
         }
         this.listInput.map((item, index) => {
           item.count = index + 1
@@ -373,7 +367,7 @@ export default {
     },
     buttoninfo() {
       this.cover_rate = JSON.stringify(this.listInput.reduce((total,{count,input}) => {
-        total[count] = input;
+        total[count] = input
         return total
       },{}))
       this.show = false
@@ -408,7 +402,7 @@ export default {
         if (this.listInput[key].input !== '' || this.listInput[key].input > 0) {
           flag = true
         } else {
-          this.$toast('补仓跌幅不能为空')
+          this.$toast(this.$t('msg.The_margin_of_margin_call_cannot_be_empty'))/* '补仓跌幅不能为空' */
           flag = false
           return
         }
@@ -425,7 +419,7 @@ export default {
           stop_profit_callback_rate: this.stop_profit_callback_rate,
           cover_rate: this.listInput,
           c_type: this.checked,
-          type:1,
+          type: 1,
           // 补仓
           // cover_rate: this.cover_rate,
           cover_callback_rate: this.cover_callback_rate,
@@ -445,7 +439,7 @@ export default {
           })
           .catch(({ msg }) => this.$toast(msg))
       } else {
-        this.$toast('补仓跌幅不能为空')
+        this.$toast(this.$t('msg.The_margin_of_margin_call_cannot_be_empty'))/* '补仓跌幅不能为空' */
       }
     },
     onConfirm(value) {
@@ -469,14 +463,14 @@ export default {
         this.cover_callback_rate = '0.3'
       } else if (index === 3) {
         this.customStrateg = {
-          max_order_count:this.max_order_count,
-          stop_profit_rate:this.stop_profit_rate,
-          number:this.number,
-          stop_profit_callback_rate:this.stop_profit_callback_rate,
-          cover_rate:this.cover_rate,
-          cover_callback_rate:this.cover_callback_rate
+          max_order_count: this.max_order_count,
+          stop_profit_rate: this.stop_profit_rate,
+          number: this.number,
+          stop_profit_callback_rate: this.stop_profit_callback_rate,
+          cover_rate: this.cover_rate,
+          cover_callback_rate: this.cover_callback_rate
         }
-        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.defaultStrategy;
+        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.defaultStrategy
         this.max_order_count = max_order_count || '17'
         this.stop_profit_rate = stop_profit_rate || '1.1'
         this.number = number || '10'
@@ -484,9 +478,9 @@ export default {
         this.cover_rate = cover_rate || JSON.stringify(JSON.parse(cover_rate)) || '{"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10","11":"13","12":"16","13":"19","14":"21","15":"26","16":"31","17":"41"}'
         this.cover_callback_rate = cover_callback_rate || '0.3'
       } else if (index === 4) {
-        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.customStrateg;
-        for(var item in this.customStrateg){
-          this[item] = this.customStrateg[item];
+        const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.customStrateg
+        for (const item in this.customStrateg) {
+          this[item] = this.customStrateg[item]
         }
         // this.max_order_count = max_order_count
         // this.stop_profit_rate = stop_profit_rate
@@ -496,11 +490,10 @@ export default {
         // this.cover_callback_rate = cover_callback_rate
       }
     },
-    
-   
-    async getStrategy(){
-      const {data} = await this.$axios.$post(API.ROBOT_STRATEGY, {type:this.queryData.type});
-      this.defaultStrategy = data;
+
+    async getStrategy() {
+      const {data} = await this.$axios.$post(API.ROBOT_STRATEGY, {type: this.queryData.type})
+      this.defaultStrategy = data
     }
   }
 }

@@ -36,7 +36,12 @@ export default {
         no_pwd: 'Please set a payment password',
         during: 'Real name certification is under review, please wait patiently',
         fail: 'Real name certification audit failed, please resubmit'
-      }
+      },
+      hk: {
+        no_pwd: '請設置支付密碼',
+        during: '實名認證正在審核中，請耐心等待',
+        fail: '實名認證審核失敗，請重新提交'
+      },
     }
   },
   computed: {

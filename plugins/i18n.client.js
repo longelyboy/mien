@@ -2,26 +2,29 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import enLocale from '@/locales/en'
 import zhLocale from '@/locales/zh'
+import znLocale from '@/locales/zn'
 import { langStorage } from '@/utils/storage'
 
 Vue.use(VueI18n)
 
 const messages = {
   en: enLocale,
-  zh: zhLocale
+  zh: zhLocale,
+  hk: znLocale
 }
 const locales = Object.keys(messages)
 
 export default ({ app, store, route }) => {
   // 跟随系统：navigator.language.split('-')[0]
+  // console.log(navigator.language.split('-')[0])
   let locale = route.query.lang
-  const fallbackLocale = 'zh'
+  const fallbackLocale = 'hk'
   if (locale && locales.includes(locale)) {
     store.dispatch('setLang', locale)
   } else {
     locale = langStorage.get()
     if (!locale) {
-      locale = navigator.language.split('-')[0]
+      locale = 'hk' // navigator.language.split('-')[0]
       store.dispatch('setLang', locale)
     }
   }

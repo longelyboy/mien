@@ -4,8 +4,9 @@ export default function ({ store, $axios, redirect }) {
   $axios.setHeader('XX-Device-Type', 'web')
   $axios.setHeader('Content-Type', 'application/x-www-form-urlencoded', ['post'])
   $axios.onRequest((config) => {
+    // const language = localStorage.getItem('LANG') || 'hk'
     const params = {
-      language: ['zh', 'tw'].includes(store.state.locale) ? 'zh_cn' : 'en_us',
+      language: store.state.locale == 'hk' ? 'hk' : ['zh', 'tw'].includes(store.state.locale) ? 'zh_cn' : 'en_us',
       ...config.data
     }
     if (!config.headers['XX-Token']) {

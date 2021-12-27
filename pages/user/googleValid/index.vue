@@ -13,14 +13,18 @@
           type="primary"
           class="kaiqi"
           @click="handleClick"
-        >{{ $t('open') }}</van-button>
+        >
+          {{ $t('open') }}
+        </van-button>
         <van-button
           v-else
           block
           type="primary"
           class="kaiqi"
           @click="handleClose"
-        >{{ $t('关闭二步验证') }}</van-button>
+        >
+          {{ $t('close') }}
+        </van-button>
         <p>
           {{ $t('tip1') }}
         </p>
@@ -69,7 +73,7 @@
     </van-dialog>
     <van-dialog
       v-model="showPop2"
-      :title="$t('输入Google验证码')"
+      :title="$t('google')"
       show-cancel-button
       @confirm="checkCode"
     >
@@ -95,7 +99,7 @@ export default {
         open: '立即开启',
         close: '关闭二步验证',
         tip1: '谷歌两步验证可以为您的账户增加一层保护，当您登录时，再输入密码的同时，还需要来自两步验证的验证码。',
-        help: '如何使用谷歌两步验证',
+        help: '如何使用谷歌两步验证？',
         set_code: '输入手机验证码',
         code_please: '请输入验证码',
         google: '输入Google验证码',
@@ -106,12 +110,23 @@ export default {
         open: 'Open Now',
         close: 'Close two-step verification',
         tip1: 'Google Two-Step Verification adds an extra layer of protection to your account by requiring a verification code from Two-Step Verification when you sign in, along with your password.',
-        help: 'How to use Google Two Step Verification',
+        help: 'How to use Google Two Step Verification?',
         set_code: 'Enter cell phone verification code',
         code_please: 'verification code',
         google: 'Enter Google Authentication Code',
         tip2: 'Please backup the above 16-bit reply key in a safe place, losing the key will not be able to reply to the two-step verification.',
         btn: 'I have the device and backed up the secret key'
+      },
+      hk: {
+        open: '立即開啟',
+        close: '關閉二步驗證',
+        tip1: '谷歌兩步驗證可以為您的賬戶增加一層保護，當您登錄時，再輸入密碼的同時，還需要來自兩步驗證的驗證碼。',
+        help: '如何使用谷歌兩步驗證？',
+        set_code: '輸入手機驗證碼',
+        code_please: '請輸入驗證碼',
+        google: '輸入Google驗證碼',
+        tip2: '請將上方的16位回復秘鑰備份在安全的地方，遺失秘鑰將無法回復兩步驗證。',
+        btn: '我已設備並備份秘鑰'
       }
     }
   },
@@ -190,7 +205,7 @@ export default {
         name: 'common-article',
         params: {
           url: this.googleUrl,
-          title: '如何使用谷歌两步验证？'
+          title: this.$t('help') // '如何使用谷歌两步验证？'
         }
       })
     }

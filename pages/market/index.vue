@@ -39,8 +39,8 @@
             <nuxt-link to="/authorize">{{ $t('add') }}</nuxt-link>
           </div>
         </template>
-        <assets-list ref="assetsList" v-if="typeShow==2" :platform="item.label"></assets-list> 
-        <assets-list-contract ref="assetsListContract" v-else :platform="item.label"></assets-list-contract> <!-- 合约 -->
+        <assets-list v-if="typeShow==2" ref="assetsList" :platform="item.label"></assets-list>
+        <assets-list-contract v-else ref="assetsListContract" :platform="item.label"></assets-list-contract> <!-- 合约 -->
       </van-tab>
     </van-tabs>
   </div>
@@ -63,6 +63,11 @@ export default {
         not: 'You have not added the platform\'s API',
         add: 'Add Now',
         balance: 'Balance'
+      },
+      hk: {
+        not: '您還未添加該平台的API',
+        add: '立即添加',
+        balance: '賬戶餘額'
       }
     }
   },
@@ -84,48 +89,42 @@ export default {
   },
   watch: {
     active (newVal) {
-
-      if(this.typeShow == 1){
+      if (this.typeShow == 1) {
         this.account = ''
         this.apiAccountBalanceSwap({ platform: this.platform[newVal].label }).then((res) => {
           this.account = res.data.free
         })
-      // this.marketList1(this.typeShow,this.platform[newVal].label)
-      }else{
+      } else {
         this.account = ''
         this.apiAccountBalance({ platform: this.platform[newVal].label }).then((res) => {
           this.account = res.data.free
         })
-      // this.marketList1(this.typeShow,this.platform[newVal].label)
       }
-     
     },
     typeShow (newVal) {
-      if(newVal == 1){
+      if (newVal == 1) {
         this.account = ''
         this.apiAccountBalanceSwap({ platform: this.platform[this.active].label }).then((res) => {
           this.account = res.data.free
         })
-      }else{
+      } else {
         this.account = ''
         this.apiAccountBalance({ platform: this.platform[this.active].label }).then((res) => {
           this.account = res.data.free
         })
       }
-     
     }
   },
   mounted() {
-    if(this.typeShow == 1){
-        this.apiAccountBalanceSwap({ platform: this.platform[0].label }).then((res) => {
-          this.account = res.data.free
-        })
-    }else{
+    if (this.typeShow == 1) {
+      this.apiAccountBalanceSwap({ platform: this.platform[0].label }).then((res) => {
+        this.account = res.data.free
+      })
+    } else {
       this.apiAccountBalance({ platform: this.platform[0].label }).then((res) => {
         this.account = res.data.free
       })
     }
-    
   },
   methods: {
     ...mapActions({
@@ -136,8 +135,6 @@ export default {
     }),
     liFn(type) {
       this.typeShow = type
-      // const platform = !this.active ? 'okex' : 'binance'
-      // this.marketList1(type,platform)
       if (type === 1) {
         this.$refs.tabs1.style.fontWeight = '700'
         this.$refs.tabs2.style.fontWeight = '400'
@@ -146,22 +143,13 @@ export default {
         this.$refs.tabs2.style.fontWeight = '700'
       }
       this.$nextTick(() => {
-        this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][0].onLoad();
-        if(this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'].length>1){
-        this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][1].onLoad();
+        this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][0].onLoad()
+        if (this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'].length > 1) {
+          this.$refs[type == 2 ? 'assetsList' : 'assetsListContract'][1].onLoad()
         }
       })
     },
-    marketList1 (type,platform) {
-       this.marketList({
-        platform,
-        type: type == 1 ? 'swap' : 'spot' // 合约
-      })
-    }
   },
-  created(){
-    // this.marketList1(1,'okex')
-  }
 }
 </script>
 

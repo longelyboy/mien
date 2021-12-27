@@ -9,23 +9,22 @@
     />
     <div class="total-card" type="flex" gutter="20">
       <div class="total-item s1">
-        <div class="label">今日盈利(USDT)</div>
+        <div class="label">{{ $t('msg.Profit_today') }}<!-- 今日盈利 -->(USDT)</div>
         <div class="value">{{ Number(today_revenue).toFixed(6) }}</div>
       </div>
       <div class="total-item s2">
-        <div class="label">本周盈利(USDT)</div>
+        <div class="label">{{ $t('msg.Profit_this_week') }}<!-- 本周盈利 -->(USDT)</div>
         <div class="value">{{ Number(week_revenue).toFixed(6) }}</div>
       </div>
     </div>
 
     <div class="total-card" type="flex" gutter="20">
-      
       <div class="total-item s2">
-        <div class="label">本月盈利(USDT)</div>
+        <div class="label">{{ $t('msg.Profit_this_month') }}<!-- 本月盈利 -->(USDT)</div>
         <div class="value">{{ Number(month_revenue).toFixed(6) }}</div>
       </div>
       <div class="total-item s2">
-        <div class="label">累计盈利(USDT)</div>
+        <div class="label">{{ $t('msg.Cumulative_profit') }}<!-- 累计盈利 -->(USDT)</div>
         <div class="value">{{ Number(total_revenue).toFixed(6) }}</div>
       </div>
     </div>
@@ -46,10 +45,10 @@
           <div class="robot-item">
             <div class="row">
               <div class="name">{{ item.market }}</div>
-              <div>{{ $t('收益') }}：{{ Number(item.revenue) | numberFormat(8) }}</div>
+              <div>{{ $t('income') }}：{{ Number(item.revenue) | numberFormat(8) }}</div>
             </div>
             <div class="row">
-              <div>{{ $t('平台') }}：{{ item.platform }}</div>
+              <div>{{ $t('platform') }}：{{ item.platform }}</div>
               <div class="time">{{ item.ctime }}</div>
             </div>
           </div>
@@ -76,8 +75,8 @@ export default {
       limit: 20,
       today_revenue: 0,
       total_revenue: 0,
-      week_revenue:0,
-      month_revenue:0
+      week_revenue: 0,
+      month_revenue: 0
 
     }
   },

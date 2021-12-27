@@ -78,6 +78,14 @@ export default {
         receipt: 'Receipt',
         withdraw: 'withdraw',
         transfer: 'transfer'
+      },
+      hk: {
+        title: '資產',
+        total: '總資產折合',
+        total2: '燃料余額',
+        receipt: '充值',
+        withdraw: '提幣',
+        transfer: '轉賬'
       }
     }
   },

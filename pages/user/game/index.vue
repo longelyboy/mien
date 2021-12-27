@@ -49,6 +49,12 @@ export default {
         language: 'Change Language',
         tip1: 'Your VIP status expires at',
         tip2: 'Your vip status has expired!'
+      },
+      hk: {
+        contact: '聯繫我們',
+        language: '選擇語言',
+        tip1: '您的vip身份到期時間為',
+        tip2: '您的vip身份已到期!'
       }
     }
   },

@@ -5,7 +5,6 @@
         <van-col class="page-header-left" style="width:100%;margin:auto;">
           <h2 class="page-title" >{{ $t('nav.position') }}</h2>
         </van-col>
-         
       </van-row>
     </div>
     <van-row class="head" type="flex" justify="space-between" align="center">
@@ -20,16 +19,16 @@
             <van-row type="flex" justify="space-between" align="center">
               <van-col class="left">
                 <p>{{ item.stock }} <i>/USDT</i> </p>
-                <p> {{ item.price | numberFormat(5)}}（{{ item.platform }}）</p>
+                <p> {{ item.price | numberFormat(5) }}（{{ item.platform }}）</p>
               </van-col>
 
               <van-col class="right">
-                <p class="top">{{ item.first_order_value| numberFormat(5)}} USDT</p>
+                <p class="top">{{ item.first_order_value| numberFormat(5) }} USDT</p>
                 <p class="bottom">{{ item.revenue | numberFormat(5) }}  USDT</p>
               </van-col>
               <van-col class="right">
                 <p class="" :class=" item.rate < 0 ? 'hq-red' : 'hq-green'">
-                  {{  item.rate }}%
+                  {{ item.rate }}%
                 </p>
               </van-col>
             </van-row>
@@ -49,7 +48,7 @@
 import { SwipeCell } from 'vant'
 import { mapState, mapActions } from 'vuex'
 import TickerDrawer from '../ticker/components/TickerDrawer'
-let timer = null
+const timer = null
 let isDestroy = false
 export default {
   layout: 'navigation',
@@ -65,16 +64,16 @@ export default {
   computed: {
     ...mapState({
       tickerList: ({ ticker }) => ticker.list,
-      robotData: ({ robot }) =>  robot.robotList
+      robotData: ({ robot }) => robot.robotList
     })
   },
   async created () {
     isDestroy = false
-    await this.robotList();
+    await this.robotList()
     const timer = setInterval(async () => {
-        await this.robotList()
-      }, 4000);
-     this.$once('hook:beforeDestroy', () => {
+      await this.robotList()
+    }, 4000)
+    this.$once('hook:beforeDestroy', () => {
       clearTimeout(timer)
     })
 
@@ -84,7 +83,7 @@ export default {
   },
   methods: {
     ...mapActions({
-    robotList: 'robot/robotList'
+      robotList: 'robot/robotList'
     }),
     handleLink (path) {
       this.$router.push(path)
@@ -96,15 +95,14 @@ export default {
       }
       return '-'
     },
-    
-    getRate({price,first_order_value}){
 
+    getRate({price,first_order_value}) {
       // alert(first_order_value)
-        let val  = ((price - first_order_value) / first_order_value).toFixed(5)
-        return {
-            str:val < 0 ? '' : '+',
-            val
-        }
+      const val = ((price - first_order_value) / first_order_value).toFixed(5)
+      return {
+        str: val < 0 ? '' : '+',
+        val
+      }
     }
   }
 }
