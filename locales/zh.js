@@ -56,6 +56,10 @@ export default {
     contact_us: '联系我们',
     Authentication: '身份验证中',
     Authorized_login_succeeded: '授权登录成功',
+    Binance_registration: '币安注册',
+    Fluctuating_market_selling_high_and_buying_low_stable_profit: '震荡行情，高抛低吸，稳定获利',
+    Intelligent_tracking_so_that_the_cost_of_buying_is_lower_and_the_profit_of_selling_is_more_correct: '智能追踪，让买入成本更低，卖出盈利更对',
+    OKEX_registration: 'OKEX注册',
   },
   nav: {
     home: '首页',

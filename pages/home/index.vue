@@ -14,12 +14,12 @@
     <rank></rank>
     <ul>
       <li @click="handleLink('https://accounts.binance.com/zh-CN/register?ref=108187771')">
-        <p>币安注册 <img src="../../assets/images/binance.png" alt=""> </p>
-        <span>震荡行情，高抛低吸，稳定获利</span>
+        <p>{{ $t('msg.Binance_registration') }}<!-- 币安注册 --> <img src="../../assets/images/binance.png" alt=""> </p>
+        <span>{{ $t('msg.Fluctuating_market_selling_high_and_buying_low_stable_profit') }}<!-- 震荡行情，高抛低吸，稳定获利 --></span>
       </li>
       <li @click="handleLink('https://www.okexa.com/join/11800910')">
-        <p>OKEX注册 <img src="../../assets/images/okex.png" alt=""> </p>
-        <span>智能追踪，让买入成本更低，卖出盈利更对</span>
+        <p>{{ $t('msg.OKEX_registration') }}<!-- OKEX注册 --> <img src="../../assets/images/okex.png" alt=""> </p>
+        <span>{{ $t('msg.Intelligent_tracking_so_that_the_cost_of_buying_is_lower_and_the_profit_of_selling_is_more_correct') }}<!-- 智能追踪，让买入成本更低，卖出盈利更对 --></span>
       </li>
     </ul>
     <menu-pic></menu-pic>
@@ -64,8 +64,7 @@ export default {
     ...mapActions({
       getBanner: 'getBanner'
     }),
-    
-     handleLink (path) {
+    handleLink (path) {
       window.open(path)
     },
     viewDetail(item) {

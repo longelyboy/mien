@@ -56,6 +56,10 @@ export default {
     contact_us: 'contact us',
     Authentication: 'Authentication',
     Authorized_login_succeeded: 'Authorized login succeeded',
+    Binance_registration: 'Binance registration',
+    Fluctuating_market_selling_high_and_buying_low_stable_profit: 'Fluctuating market, selling high and buying low, stable profit',
+    Intelligent_tracking_so_that_the_cost_of_buying_is_lower_and_the_profit_of_selling_is_more_correct: 'Intelligent tracking, so that the cost of buying is lower, and the profit of selling is more correct',
+    OKEX_registration: 'OKEX registration',
   },
   nav: {
     home: 'Home',
