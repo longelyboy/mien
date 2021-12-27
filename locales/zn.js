@@ -199,6 +199,8 @@ export default {
     safety_lv: '安全等級',
     google_valid: 'Google二步驗證',
     cdkey: '我的激活碼',
+    operating: '操作教程',
+    report: '分析報告',
     invite: '分享',
     about: '服務協議',
     community: '社區',
