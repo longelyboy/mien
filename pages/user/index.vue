@@ -101,13 +101,13 @@
         is-link
         @click="handleLink('/wallet?symbol=USDT')"
       />
-      <!-- <van-cell
+      <van-cell
         v-if="initInfo.quant_revenue_type==2"
         icon="fire-o"
         :title="`${initInfo.system_balance_name}${$t('pageUser.ranliao')}`"
         is-link
         @click="handleLink('/wallet/index2')"
-      /> -->
+      />
       <van-cell
         icon="records"
         :title="$t('pageUser.history')"
@@ -161,12 +161,29 @@
         is-link
         @click="handleLink('/user/invite/poster')"
       />
+    </van-cell-group>
+
+    <van-cell-group>
       <van-cell
         icon="orders-o"
         :title="$t('pageUser.about')"
         is-link
         @click="goAbout()"
       />
+      <van-cell
+        icon="question-o"
+        :title="$t('pageUser.operating')"
+        is-link
+        @click="goOperate()"
+      />
+
+      <van-cell
+        icon="chart-trending-o"
+        :title="$t('pageUser.report')"
+        is-link
+        @click="goReport()"
+      />
+
       <van-cell
         icon="chat-o"
         :title="$t('contact')"
@@ -254,6 +271,24 @@ export default {
         params: {
           url: this.initInfo.system_user_agreement,
           title: this.$t('pageUser.about') // '服务协议'
+        }
+      })
+    },
+    goOperate() {
+      this.$router.push({
+        name: 'common-article',
+        params: {
+          url: this.initInfo.system_help_center,
+          title: '操作教程'
+        }
+      })
+    },
+    goReport() {
+      this.$router.push({
+        name: 'common-article',
+        params: {
+          url: this.initInfo.system_help_report,
+          title: '分析报告'
         }
       })
     },

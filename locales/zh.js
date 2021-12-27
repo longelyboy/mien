@@ -202,7 +202,9 @@ export default {
     invite: '分享',
     about: '服务协议',
     community: '社区',
-    ranliao: '燃料'
+    ranliao: '积分',
+    operating: '操作教程',
+    report: '分析报告',
   },
   followTitle: '跟单合约',
   buyPackage: '购买套餐',

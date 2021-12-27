@@ -200,7 +200,9 @@ export default {
     invite: 'Invitation',
     about: 'User Agreement',
     community: 'Community',
-    ranliao: ' Gas'
+    ranliao: ' Integral',
+    operating: 'Operating tutorial',
+    report: 'Analysis report',
   },
   followTitle: 'Copy Trading',
   buyPackage: 'Buy package',
