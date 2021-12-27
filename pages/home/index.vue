@@ -12,6 +12,16 @@
     </van-swipe>
     <notice></notice>
     <rank></rank>
+    <ul>
+      <li @click="handleLink('https://accounts.binance.com/zh-CN/register?ref=108187771')">
+        <p>币安注册 <img src="../../assets/images/binance.png" alt=""> </p>
+        <span>震荡行情，高抛低吸，稳定获利</span>
+      </li>
+      <li @click="handleLink('https://www.okexa.com/join/11800910')">
+        <p>OKEX注册 <img src="../../assets/images/okex.png" alt=""> </p>
+        <span>智能追踪，让买入成本更低，卖出盈利更对</span>
+      </li>
+    </ul>
     <menu-pic></menu-pic>
     <markets></markets>
     <div v-show="show" class="van-overlay" @click="show=false">
@@ -54,6 +64,10 @@ export default {
     ...mapActions({
       getBanner: 'getBanner'
     }),
+    
+     handleLink (path) {
+      window.open(path)
+    },
     viewDetail(item) {
       this.$router.push({
         name: 'common-article',
