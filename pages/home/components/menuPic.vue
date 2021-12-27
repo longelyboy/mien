@@ -1,5 +1,9 @@
 <template>
+
+  
   <van-row class="nav-pic" type="flex" gutter="15">
+
+    
     <van-col style="width:48%;float:left;margin-right:10px;padding-right:0;">
       <nuxt-link to="/authorize" class="nav-item" :style="{ 'background-image': `url(${image1})` }">
         <p class="title">{{ $t('homeMenu.item1.title') }}</p>
