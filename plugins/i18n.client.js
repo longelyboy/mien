@@ -18,6 +18,7 @@ export default ({ app, store, route }) => {
   // 跟随系统：navigator.language.split('-')[0]
   // console.log(navigator.language.split('-')[0])
   let locale = route.query.lang
+  console.log(route.query.lang)
   const fallbackLocale = 'hk'
   if (locale && locales.includes(locale)) {
     store.dispatch('setLang', locale)

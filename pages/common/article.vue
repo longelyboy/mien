@@ -14,6 +14,7 @@ export default {
   },
   created () {
     this.info = this.$route.params
+    console.log(this.info)
   }
 }
 </script>

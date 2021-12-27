@@ -130,6 +130,8 @@ export default {
       }).then(() => {
         this.logOut().then(() => {
           this.$router.replace('/home')
+          localStorage.clear()
+          localStorage.setItem('LANG','hk')
         })
       })
     }
