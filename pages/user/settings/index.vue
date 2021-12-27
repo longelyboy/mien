@@ -44,6 +44,12 @@
         is-link
         to="/user/settings/payPwd"
       />
+
+      <van-cell
+        :title="$t('changeLang')"
+        is-link
+        to="/user/settings/changeLanguage"
+      />
     </van-cell-group>
     <div
       v-if="!thirdLoginEnabled"
