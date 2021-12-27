@@ -282,6 +282,7 @@ export default {
         this.price = robot.price
         this.sl_trigger_price = robot.sl_trigger_price
         this.listInput = []
+        this.getlistInput()
       })
     } else {
       const markets = this.queryData
@@ -306,6 +307,51 @@ export default {
     await this.getContractSize()
   },
   methods: {
+    getlistInput () {
+      this.listInput = []
+      if (this.cover_rate) {
+        this.listInput = []
+        const obj = JSON.parse(this.cover_rate)
+        const arr = []
+        for (const key in obj) {
+          const obj1 = {}
+          obj1.count = ''
+          obj1.input = obj[key]
+          arr.push(obj1)
+        }
+        this.listInput = arr
+        this.listInput.map((item, index) => {
+          item.count = index + 1
+        })
+
+        const obj2 = JSON.parse(this.cover_rate)
+        const arr2 = []
+        for (const key in obj2) {
+          const obj1 = {}
+          obj1.count = ''
+          obj1.input = obj[key]
+          arr2.push(obj1)
+        }
+
+        if (arr2.length != this.max_order_count) {
+          if (this.max_order_count > arr2.length) {
+            for (let i = 0; i < this.max_order_count - arr2.length; i++) {
+              const obj = {}
+              obj.count = ''
+              obj.input = ''
+              this.listInput.push(obj)
+            }
+          } else {
+            for (let i = 0; i < arr2.length - this.max_order_count; i++) {
+              this.listInput.pop()
+            }
+          }
+        }
+        this.listInput.map((item, index) => {
+          item.count = index + 1
+        })
+      }
+    },
     showSetting() {
       this.listInput = []
       if (this.cover_rate == '') {
@@ -521,6 +567,7 @@ export default {
         this.stop_profit_callback_rate = stop_profit_callback_rate || '0.1'
         this.cover_rate = cover_rate || JSON.stringify(JSON.parse(cover_rate)) || '{"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10","11":"13","12":"16","13":"19","14":"21","15":"26","16":"31","17":"41"}'
         this.cover_callback_rate = cover_callback_rate || '0.3'
+        this.getlistInput()
       } else if (index === 4) {
         const {max_order_count,stop_profit_rate,number,stop_profit_callback_rate,cover_rate,cover_callback_rate} = this.customStrateg
         for (const item in this.customStrateg) {
