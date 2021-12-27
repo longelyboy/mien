@@ -102,13 +102,13 @@
         is-link
         @click="handleLink('/wallet?symbol=USDT')"
       />
-      <!-- <van-cell
+      <van-cell
         v-if="initInfo.quant_revenue_type==2"
         icon="fire-o"
         :title="`${initInfo.system_balance_name}${$t('pageUser.ranliao')}`"
         is-link
         @click="handleLink('/wallet/index2')"
-      /> -->
+      />
       <van-cell
         icon="records"
         :title="$t('pageUser.history')"

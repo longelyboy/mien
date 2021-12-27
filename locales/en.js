@@ -142,7 +142,7 @@ export default {
     invite: 'Invitation',
     about: 'User Agreement',
     community: 'Community',
-    ranliao: ' MIEN',
+    ranliao: ' Integral',
     operating: 'Operating tutorial',
     report: 'Analysis report',
   },

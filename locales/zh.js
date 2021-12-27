@@ -144,7 +144,7 @@ export default {
     invite: '分享',
     about: '服务协议',
     community: '社区',
-    ranliao: 'MIEN',
+    ranliao: '积分',
     operating: '操作教程',
     report: '分析报告',
   },

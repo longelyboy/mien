@@ -66,7 +66,7 @@ export default {
       zh: {
         title: '资产',
         total: '总资产折合',
-        total2: '燃料余额',
+        total2: '积分余额',
         receipt: '充值',
         withdraw: '提币',
         transfer: '转账'
@@ -74,7 +74,7 @@ export default {
       en: {
         title: ' Assets',
         total: 'Total Assets',
-        total2: 'Fuel balance',
+        total2: 'Integral balance',
         receipt: 'Receipt',
         withdraw: 'withdraw',
         transfer: 'transfer'
@@ -98,6 +98,7 @@ export default {
   },
   computed: {
     ...mapState({
+      logged: ({ user }) => user.logged,
       currency: ({ currency }) => currency,
       initInfo: index => index.initInfo,
       userInfo: ({ user }) => user.userInfo
@@ -108,6 +109,13 @@ export default {
     ...mapActions({
       balanceLog: 'wallet/balanceLog'
     }),
+    handleLink (path) {
+      if (this.logged) {
+        this.$router.push(path)
+      } else {
+        this.$router.push('/sign/login')
+      }
+    },
     loadBillList () {
       if (this.refreshing) {
         this.list = []
