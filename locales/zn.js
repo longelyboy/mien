@@ -56,6 +56,10 @@ export default {
     contact_us: '聯系我們',
     Authentication: '身份驗證中',
     Authorized_login_succeeded: '授權登錄成功',
+    Binance_registration: '幣安註冊',
+    Fluctuating_market_selling_high_and_buying_low_stable_profit: '震蕩行情，高拋低吸，穩定獲利',
+    Intelligent_tracking_so_that_the_cost_of_buying_is_lower_and_the_profit_of_selling_is_more_correct: '智能追蹤，讓買入成本更低，賣出盈利更對',
+    OKEX_registration: 'OKEX註冊',
   },
   nav: {
     home: '首頁',
