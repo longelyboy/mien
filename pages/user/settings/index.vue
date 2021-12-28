@@ -129,9 +129,10 @@ export default {
         message: this.$t('tip_msg') + '？'
       }).then(() => {
         this.logOut().then(() => {
-          this.$router.replace('/home')
-          localStorage.clear()
           localStorage.setItem('LANG','hk')
+          localStorage.setItem('lang',true)
+          // location.reload()
+          this.$router.replace('/home')
         })
       })
     }

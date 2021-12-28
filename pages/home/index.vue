@@ -56,6 +56,12 @@ export default {
       banner: index => index.banner
     })
   },
+  created () {
+    if (localStorage.getItem('lang')) {
+      localStorage.removeItem('lang')
+      this.$i18n.locale = localStorage.getItem('LANG')
+    }
+  },
   mounted() {
     this.getBanner()
   },

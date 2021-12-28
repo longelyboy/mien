@@ -19,13 +19,14 @@ export default {
         zh: '中文',
         en: 'English',
         hk: '中文繁體',
-      }
+      },
+      locale: localStorage.getItem('LANG')
     }
   },
   computed: {
-    ...mapState({
-      locale: state => state.locale
-    })
+    // ...mapState({
+    //   locale: state => state.locale
+    // })
   },
   methods: {
     ...mapActions({
