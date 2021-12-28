@@ -207,7 +207,7 @@ export default {
       marketPicker: false,
       market: '',
       money: '',
-      platform: 'huobi',
+      platform: 'okex',
       robot_id: '',
       market_id: '',
       first_order_value: '100',
@@ -247,7 +247,7 @@ export default {
       const first_order_value = +this.first_order_value
       const price = +this.price || 1
       const contractSize = +this.contract_size
-      return (first_order_value * contractSize * price / 5).toFixed(6)
+      return (first_order_value * contractSize * price / 10).toFixed(6)
     }
   },
 

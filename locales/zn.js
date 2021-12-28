@@ -208,7 +208,7 @@ export default {
     invite: '分享',
     about: '服務協議',
     community: '社區',
-    ranliao: '燃料'
+    ranliao: '積分'
   },
   followTitle: '跟單合約',
   buyPackage: '購買套餐',
