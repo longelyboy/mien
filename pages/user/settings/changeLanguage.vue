@@ -19,19 +19,21 @@ export default {
         zh: '中文',
         // en: 'English',
         hk: '中文繁體',
-      }
+      },
+      locale: localStorage.getItem('LANG')
     }
   },
   computed: {
-    ...mapState({
-      locale: state => state.locale
-    })
+    // ...mapState({
+    //   locale: state => state.locale
+    // })
   },
   methods: {
     ...mapActions({
       setLang: 'setLang'
     }),
     changeFn (index) {
+      this.locale = index
       this.$i18n.locale = index
       this.setLang(index)
       // location.pathname = '/'

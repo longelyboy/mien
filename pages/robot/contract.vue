@@ -108,7 +108,7 @@
           class="setting"
           @click="showSetting()"
         >
-          {{ $t('setting') }}
+          {{ $t('setting') }}<!-- 设置 -->
         </van-button>
       </van-field>
       <van-field
@@ -145,7 +145,7 @@
       </div>
       <div style="padding: 16px;">
         <van-button round block type="info" @click="onSubmit">
-          {{ $t('actions.submit') }}
+          {{ $t('actions.submit') }} <!-- 提交 -->
         </van-button>
       </div>
     </van-form>
@@ -255,7 +255,6 @@ export default {
     if (this.$route.query.data) {
       this.queryData = JSON.parse(this.$route.query.data)
     }
-
     this.formType = this.$route.query.type
     if (this.formType === 'edit') {
       const robot = (this.robot = this.robotList.find(
@@ -290,6 +289,7 @@ export default {
       this.market = markets.market_name
       this.market_id = markets.id
       this.money = markets.money
+      console.log(this.max_order_count)
     }
 
     this.marketList({
@@ -367,46 +367,47 @@ export default {
           })
         }
       } else {
-        this.listInput = []
-        const obj = JSON.parse(this.cover_rate)
-        const arr = []
-        for (const key in obj) {
-          const obj1 = {}
-          obj1.count = ''
-          obj1.input = obj[key]
-          arr.push(obj1)
-        }
-        this.listInput = arr
-        this.listInput.map((item, index) => {
-          item.count = index + 1
-        })
+        // this.listInput = []
+        // const obj = JSON.parse(this.cover_rate)
+        // const arr = []
+        // for (const key in obj) {
+        //   const obj1 = {}
+        //   obj1.count = ''
+        //   obj1.input = obj[key]
+        //   arr.push(obj1)
+        // }
+        // this.listInput = arr
+        // this.listInput.map((item, index) => {
+        //   item.count = index + 1
+        // })
 
-        const obj2 = JSON.parse(this.cover_rate)
-        const arr2 = []
-        for (const key in obj2) {
-          const obj1 = {}
-          obj1.count = ''
-          obj1.input = obj[key]
-          arr2.push(obj1)
-        }
+        // const obj2 = JSON.parse(this.cover_rate)
+        // const arr2 = []
+        // for (const key in obj2) {
+        //   const obj1 = {}
+        //   obj1.count = ''
+        //   obj1.input = obj[key]
+        //   arr2.push(obj1)
+        // }
 
-        if (arr2.length != this.max_order_count) {
-          if (this.max_order_count > arr2.length) {
-            for (let i = 0; i < this.max_order_count - arr2.length; i++) {
-              const obj = {}
-              obj.count = ''
-              obj.input = ''
-              this.listInput.push(obj)
-            }
-          } else {
-            for (let i = 0; i < arr2.length - this.max_order_count; i++) {
-              this.listInput.pop()
-            }
-          }
-        }
-        this.listInput.map((item, index) => {
-          item.count = index + 1
-        })
+        // if (arr2.length != this.max_order_count) {
+        //   if (this.max_order_count > arr2.length) {
+        //     for (let i = 0; i < this.max_order_count - arr2.length; i++) {
+        //       const obj = {}
+        //       obj.count = ''
+        //       obj.input = ''
+        //       this.listInput.push(obj)
+        //     }
+        //   } else {
+        //     for (let i = 0; i < arr2.length - this.max_order_count; i++) {
+        //       this.listInput.pop()
+        //     }
+        //   }
+        // }
+        // this.listInput.map((item, index) => {
+        //   item.count = index + 1
+        // })
+        this.getlistInput()
       }
 
       // if (this.max_order_count > 0) {

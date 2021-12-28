@@ -123,7 +123,7 @@
       </div>
       <div style="padding: 16px;">
         <van-button round block type="info" @click="onSubmit">
-          {{ $t('actions.submit') }}
+          {{ $t('actions.submit') }} <!-- 提交 -->
         </van-button>
       </div>
     </van-form>

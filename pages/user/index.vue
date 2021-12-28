@@ -279,7 +279,7 @@ export default {
         name: 'common-article',
         params: {
           url: this.initInfo.system_help_center,
-          title: '操作教程'
+          title: this.$t('pageUser.operating') // '操作教程'
         }
       })
     },
@@ -288,7 +288,7 @@ export default {
         name: 'common-article',
         params: {
           url: this.initInfo.system_help_report,
-          title: '分析报告'
+          title: this.$t('pageUser.report') // '分析报告'
         }
       })
     },

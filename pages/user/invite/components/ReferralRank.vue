@@ -63,7 +63,10 @@ export default {
   props: {
     info: {
       type: Object,
-      required: true
+      required: true,
+      default: () => {
+        return {}
+      }
     }
   },
   data () {

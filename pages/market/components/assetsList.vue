@@ -41,10 +41,10 @@
                 class="info"
               >
                 <p>
-                  {{ $t('position_amount') }}：{{ Number(findRobot(item.id).first_order_value) | numberFormat(5) }} {{ item.money }}
+                  {{ $t('position_amount') }}：{{  getvaluesStr(findRobot(item.id).values_str,'deal_money') }}  {{ item.money }}
                 </p>
                 <p>
-                  {{ $t('average_price') }}：{{ Number(findRobot(item.id).price) | numberFormat(5) }} {{ item.money }}
+                  {{ $t('average_price') }}：{{ getvaluesStr(findRobot(item.id).values_str,'base_price') }} {{ item.money }}
                 </p>
                 <p>
                   {{ $t('expected_return') }}：{{ Number(findRobot(item.id).revenue) | numberFormat(5) }} {{ item.money }}
@@ -158,6 +158,13 @@ export default {
       if (values) {
         const valueJson = JSON.parse(values)
         return Number(valueJson.deal_amount).toFixed(6) || '-'
+      }
+      return '-'
+    },
+    getvaluesStr (value,params) {
+      if (value) {
+        const valueJson = JSON.parse(value)
+        return Number(valueJson[params]).toFixed(7) || '-'
       }
       return '-'
     },
