@@ -40,7 +40,7 @@ export const actions = {
     await tokenStorage.remove()
     commit('SET_USER_INFO', {})
     commit('SET_USER_TOKEN', '')
-    commit('SET_LANG', 'hk')
+    // commit('SET_LANG', 'hk')
     commit('SET_LOGGED', false)
   },
   async getCode (context, param) {

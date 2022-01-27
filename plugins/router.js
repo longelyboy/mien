@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import { tokenStorage } from '~/utils/storage'
 export default ({ app }) => {
   app.router.beforeEach((to, from, next) => {
+    if (!localStorage.getItem('LANG')) {
+      localStorage.setItem('LANG', 'hk')
+      app.i18n.locale = 'hk'
+    }
     let transitionName = ''
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length

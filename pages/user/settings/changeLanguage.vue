@@ -34,6 +34,7 @@ export default {
     }),
     changeFn (index) {
       this.$i18n.locale = index
+      this.locale = index
       this.setLang(index)
       // location.pathname = '/'
     }
